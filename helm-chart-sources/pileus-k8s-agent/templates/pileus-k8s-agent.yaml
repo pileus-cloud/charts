@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pileus-k8s-agent
+spec:
+  containers:
+  - image: pileuscloud/k8s-agent
+    name: k8s-agent
+  serviceAccountName: pileus-k8s-agent
