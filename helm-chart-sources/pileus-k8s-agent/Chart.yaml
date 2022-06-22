@@ -1,6 +1,0 @@
-apiVersion: v2
-name: pileus-k8s-agent
-appVersion: "1.0"
-description: A Helm chart for pileus-k8s-agent 1.0
-version: 0.1.0
-type: application

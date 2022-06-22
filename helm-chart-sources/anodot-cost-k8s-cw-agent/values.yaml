@@ -1,0 +1,39 @@
+config:
+  clusterName: "test-cluster"
+  clusterRegion: "us-east-1"
+
+image:
+  repository: public.ecr.aws/i5o6o6d7/pileus
+  pullPolicy: IfNotPresent
+  tag: "amazon_cloudwatch-agent_1.247345.36-101-g57e317c_no_custom_metrics"
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 200Mi
+  requests:
+    cpu: 200m
+    memory: 200Mi
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
