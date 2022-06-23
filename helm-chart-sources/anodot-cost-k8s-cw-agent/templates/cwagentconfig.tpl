@@ -3,12 +3,12 @@ data:
   cwagentconfig.json: |
     {
       "agent": {
-        "region": "{{ .Values.config.clusterName }}"
+        "region": "{{ .Values.config.clusterRegion }}"
       },
       "logs": {
         "metrics_collected": {
           "kubernetes": {
-            "cluster_name": "{{ .Values.config.clusterRegion }}",
+            "cluster_name": "{{ .Values.config.clusterName }}",
             "metrics_collection_interval": 60
           }
         },
