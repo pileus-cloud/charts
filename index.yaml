@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  anodot-cost-k8s-cw-agent:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2022-06-22T14:51:33.47641+03:00"
+    description: A Helm chart for Kubernetes
+    digest: e2f65bdb5fe259c0b2cbd6afb4dc06d14fcdd426b1c77f85a977179f6849767f
+    name: anodot-cost-k8s-cw-agent
+    type: application
+    urls:
+    - https://pileus-cloud.github.io/charts/anodot-cost-k8s-cw-agent-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-06-22T14:51:33.475992+03:00"
