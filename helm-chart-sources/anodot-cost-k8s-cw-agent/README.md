@@ -17,5 +17,5 @@ config:
 
 2. Run installation
 ```shell
-helm upgrade -i anodot-cost-k8s-cw-agent -f ./values.yaml --namespace amazon-cloudwatch --create-namespace
+helm upgrade -i anodot-cost-k8s-cw-agent anodot/anodot-cost-k8s-cw-agent -f ./values.yaml --namespace amazon-cloudwatch --create-namespace
 ```
