@@ -3,6 +3,10 @@ kind: ServiceAccount
 metadata:
   name: {{ include "anodot-cost-cloudwatch-agent.fullname" . }}
   namespace: {{ .Release.Namespace }}
+  {{- with .Values.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
