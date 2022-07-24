@@ -15,6 +15,11 @@ resources:
     cpu: 200m
     memory: 200Mi
 
+serviceAccount:
+  # Annotations to add to the service account
+  annotations: {}
+    # eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/iam-role-name
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
