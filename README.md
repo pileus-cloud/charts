@@ -5,5 +5,5 @@ This repository hosts the Pileus Helm Charts for deploying Pileus products to Ku
 
 Add Anodot Cloud Cost repository by running next command:
 ```bash
-helm repo add anodot https://pileus-cloud.github.io/charts
+helm repo add anodot https://shonl.github.io/pileus-cloud-charts/
 ```
