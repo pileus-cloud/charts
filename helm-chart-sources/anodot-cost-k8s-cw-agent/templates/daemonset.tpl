@@ -16,7 +16,6 @@ spec:
         - name: cloudwatch-agent
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          hostNetwork: {{ .Values.hostNetwork}}
           resources:
           {{- toYaml .Values.resources | nindent 12 }}
           # Please don't change below envs
@@ -74,6 +73,7 @@ spec:
           hostPath:
             path: /dev/disk/
       terminationGracePeriodSeconds: 60
+      hostNetwork: {{ .Values.hostNetwork}}
       serviceAccountName: {{ include "anodot-cost-cloudwatch-agent.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
