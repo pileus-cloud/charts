@@ -16,6 +16,7 @@ spec:
         - name: cloudwatch-agent
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          hostNetwork: {{ .Values.hostNetwork}}
           resources:
           {{- toYaml .Values.resources | nindent 12 }}
           # Please don't change below envs
