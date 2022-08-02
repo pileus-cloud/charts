@@ -12,6 +12,10 @@ spec:
       labels:
         name: {{ include "anodot-cost-cloudwatch-agent.fullname" . }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+            {{- toYaml . | nindent 8 }}
+        {{- end }}
       containers:
         - name: cloudwatch-agent
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
