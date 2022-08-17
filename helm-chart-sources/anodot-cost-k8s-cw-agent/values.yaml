@@ -1,11 +1,12 @@
 config:
   clusterName: "test-cluster"
   clusterRegion: "us-east-1"
+  tagService: false
 
 image:
-  repository: public.ecr.aws/i5o6o6d7/pileus
+  repository: public.ecr.aws/q4e2d9n7/cloudwatch-agent
   pullPolicy: IfNotPresent
-  tag: "amazon_cloudwatch-agent_1.247345.36-101-g57e317c_no_custom_metrics"
+  tag: "1.247354.0-1-g563aa72-dev"
 
 resources:
   limits:
