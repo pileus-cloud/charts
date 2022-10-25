@@ -9,7 +9,7 @@ data:
         "metrics_collected": {
           "kubernetes": {
             "cluster_name": "{{ .Values.config.clusterName }}",
-            "metrics_collection_interval": 60,
+            "metrics_collection_interval": {{ .Values.config.collectionInterval }},
             "tag_service": {{ .Values.config.tagService }}
           }
         },
