@@ -2,11 +2,12 @@ config:
   clusterName: "test-cluster"
   clusterRegion: "us-east-1"
   tagService: false
-
+  collectionInterval: 120
+  
 image:
-  repository: public.ecr.aws/q4e2d9n7/cloudwatch-agent
+  repository: public.ecr.aws/cloudwatch-agent/cloudwatch-agent
   pullPolicy: IfNotPresent
-  tag: "1.247354.0-1-g563aa72-dev"
+  tag: "1.247354.0b251981"
 
 resources:
   limits:
