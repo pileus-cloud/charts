@@ -10,8 +10,9 @@ jobs:
 
       - name: Install MicroK8s
         run: | 
-          snap install microk8s --classic --channel=1.25
-          usermod -a -G microk8s $USER
-          chown -f -R $USER ~/.kube
+          sudo snap install microk8s --classic --channel=1.25
+          echo $USER
+          sudo usermod -a -G microk8s $USER
+          sudo chown -f -R $USER ~/.kube
           microk8s status --wait-ready
           microk8s kubectl get nodes
