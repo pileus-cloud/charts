@@ -8,5 +8,4 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - name: Install MicroK8s
-        run: sudo snap install microk8s --classic --channel=1.25
+      - run: sudo snap install microk8s --classic --channel=1.25
