@@ -2,7 +2,11 @@ name: Helm Chart test
 run-name: helm chart test 🚀
 on: [push]
 jobs:
-  test-on-k8s-1_25:
+  test:
+    strategy:
+      matrix:
+        k8s: [ 1.23, 1.24, 1.25 ]
+
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -10,7 +14,7 @@ jobs:
 
       - name: Install MicroK8s
         run: | 
-          sudo snap install microk8s --classic --channel=1.25
+          sudo snap install microk8s --classic --channel=${{ matrix.k8s }}
           sudo microk8s status --wait-ready
 
       - name: Test cw-agent chart
