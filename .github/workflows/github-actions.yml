@@ -11,5 +11,5 @@ jobs:
       - name: Install MicroK8s
         run: | 
           sudo snap install microk8s --classic --channel=1.25
-          microk8s status --wait-ready
-          microk8s kubectl get nodes
+          sudo microk8s status --wait-ready
+          sudo microk8s kubectl get nodes
