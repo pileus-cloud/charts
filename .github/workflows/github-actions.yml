@@ -2,7 +2,7 @@ name: Helm Chart test
 run-name: helm chart test 🚀
 on: [push]
 jobs:
-  test on k8s 1.25:
+  test on k8s 1_25:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
