@@ -12,4 +12,8 @@ jobs:
         run: | 
           sudo snap install microk8s --classic --channel=1.25
           sudo microk8s status --wait-ready
-          sudo microk8s kubectl get nodes
+
+      - name: Test cw-agent chart
+        run: |
+          sudo microk8s helm3 upgrade -i cw-agent --atomic helm-chart-sources/anodot-cost-k8s-cw-agent
+          sudo microk8s helm3 status cw-agent
