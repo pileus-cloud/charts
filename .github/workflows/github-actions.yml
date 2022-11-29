@@ -12,7 +12,7 @@ jobs:
         run: helm lint --with-subcharts helm-chart-sources/anodot-cost-k8s-cw-agent
 
   test_in_k8s:
-    needs: [kubeconform]
+    needs: [lint]
     strategy:
       matrix:
         k8s: [ 1.23, 1.24, 1.25 ]
