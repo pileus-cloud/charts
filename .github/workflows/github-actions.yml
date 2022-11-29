@@ -32,3 +32,4 @@ jobs:
         run: |
           sudo microk8s helm3 upgrade -i cw-agent --atomic helm-chart-sources/anodot-cost-k8s-cw-agent
           sudo microk8s helm3 status cw-agent
+          sudo microk8s kubectl get pod
