@@ -32,7 +32,7 @@ jobs:
         run: |
           sudo microk8s helm3 upgrade -i --atomic anodot-cost-k8s-cw-agent helm-chart-sources/anodot-cost-k8s-cw-agent
           echo
-          sleep 5
+          sleep 10
           sudo microk8s kubectl get po
           export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}')          
           if [ $STATUS != "Running" ]; then exit 1; fi
