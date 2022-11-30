@@ -31,8 +31,17 @@ jobs:
       - name: Test cw-agent chart
         run: |
           sudo microk8s helm3 upgrade -i --atomic anodot-cost-k8s-cw-agent helm-chart-sources/anodot-cost-k8s-cw-agent
-          echo
-          sleep 10
+
+          export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}') 
+          while [ $STATUS != "ContainerCreating" ]
+          do
+            export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}')
+            sleep 1
+          done          
+
           sudo microk8s kubectl get po
-          export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}')          
-          if [ $STATUS != "Running" ]; then exit 1; fi
+      
+          if [ $STATUS != "Running" ]
+          then 
+            exit 1
+          fi
