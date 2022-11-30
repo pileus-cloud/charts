@@ -5,7 +5,7 @@ config:
   collectionInterval: 120
   
 image:
-  repository: public.ecr.aws/q4e2d9n7/cloudwatch-agent-test
+  repository: public.ecr.aws/q4e2d9n7/cloudwatch-agent
   pullPolicy: IfNotPresent
   tag: "1.247354.0-1-g563aa72-dev"
 
