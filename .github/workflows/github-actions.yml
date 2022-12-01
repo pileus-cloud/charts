@@ -1,0 +1,47 @@
+name: Helm Chart test
+run-name: helm chart test 🚀
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Helm lint
+        run: helm lint --with-subcharts helm-chart-sources/anodot-cost-k8s-cw-agent
+
+  test_in_k8s:
+    needs: [lint]
+    strategy:
+      matrix:
+        k8s: [ 1.23, 1.24, 1.25 ]
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Install MicroK8s
+        run: | 
+          sudo snap install microk8s --classic --channel=${{ matrix.k8s }}
+          sudo microk8s status --wait-ready
+          sudo microk8s enable helm3
+
+      - name: Test cw-agent chart
+        run: |
+          sudo microk8s helm3 upgrade -i --atomic anodot-cost-k8s-cw-agent helm-chart-sources/anodot-cost-k8s-cw-agent
+
+          export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}') 
+          while [ $STATUS == "ContainerCreating" ]
+          do
+            export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}')
+            sleep 1
+          done          
+
+          sudo microk8s kubectl get po
+      
+          if [ $STATUS != "Running" ]
+          then 
+            exit 1
+          fi
