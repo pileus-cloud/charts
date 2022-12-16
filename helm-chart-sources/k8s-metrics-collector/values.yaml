@@ -90,7 +90,7 @@ affinity: {}
 prometheusrule:
   enabled: true
   prometheus:
-    namespace: monitoring
+    namespace: default
     labels:
       release: prometheus
       app: kube-prometheus-stack
