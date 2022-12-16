@@ -42,4 +42,4 @@ jobs:
           sudo microk8s helm3 install --set grafana.enabled=false --set alertmanager.enabled=false kube-prometheus-stack prometheus-community/kube-prometheus-stack
 
       - name: Test k8s-metrics-collector chart
-        run: ./test-chart.sh k8s-metric-collector
+        run: ./test-chart.sh k8s-metrics-collector
