@@ -11,7 +11,7 @@ jobs:
       - name: Validate
         uses: nlamirault/helm-kubeconform-action@v0.1.0
         with:
-          charts: ./
+          charts: ./helm-chart-sources
 
   lint:
     runs-on: ubuntu-latest
