@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         k8s: [ 1.21, 1.23, 1.24, 1.25 ]
-        chart: [ anodot-cost-k8s-cw-agent, k8s-metrics-collector ]
 
     runs-on: ubuntu-latest
     steps:
