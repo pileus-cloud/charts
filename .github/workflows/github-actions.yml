@@ -16,6 +16,7 @@ jobs:
     strategy:
       matrix:
         k8s: [ 1.23, 1.24, 1.25 ]
+        chart: [ anodot-cost-k8s-cw-agent, k8s-metrics-collector ]
 
     runs-on: ubuntu-latest
     steps:
@@ -28,8 +29,5 @@ jobs:
           sudo microk8s status --wait-ready
           sudo microk8s enable helm3
 
-      - name: Test cw-agent chart
-        run: ./test-chart.sh anodot-cost-k8s-cw-agent
-
-      - name: Test k8s-metrics-collector chart
-        run: ./test-chart.sh k8s-metrics-collector
+      - name: Test chart
+        run: chmod +x test-chart.sh && ./test-chart.sh ${{ chart }}
