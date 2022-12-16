@@ -30,4 +30,4 @@ jobs:
           sudo microk8s enable helm3
 
       - name: Test chart
-        run: chmod +x test-chart.sh && ./test-chart.sh ${{ chart }}
+        run: chmod +x test-chart.sh && ./test-chart.sh ${{ matrix.chart }}
