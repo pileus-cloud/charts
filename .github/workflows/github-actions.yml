@@ -2,17 +2,6 @@ name: Helm Chart test
 run-name: helm chart test 🚀
 on: [push]
 jobs:
-  kubeconform:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Validate
-        uses: nlamirault/helm-kubeconform-action@v0.1.0
-        with:
-          charts: ./helm-chart-sources
-
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -40,19 +29,7 @@ jobs:
           sudo microk8s enable helm3
 
       - name: Test cw-agent chart
-        run: |
-          sudo microk8s helm3 upgrade -i --atomic anodot-cost-k8s-cw-agent helm-chart-sources/anodot-cost-k8s-cw-agent
+        run: ./test-chart.sh anodot-cost-k8s-cw-agent
 
-          export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}') 
-          while [ $STATUS == "ContainerCreating" ]
-          do
-            export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}')
-            sleep 1
-          done          
-
-          sudo microk8s kubectl get po
-      
-          if [ $STATUS != "Running" ]
-          then 
-            exit 1
-          fi
+      - name: Test k8s-metrics-collector chart
+        run: ./test-chart.sh k8s-metrics-collector
