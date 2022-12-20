@@ -1,0 +1,106 @@
+# Default values for k8s-metrics-collector.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: public.ecr.aws/i5o6o6d7/k8s-metrics-agent
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.2.20"
+
+# workload: Deployment or CronJob
+workload: Deployment
+
+CronJob:
+  schedule: "0 * * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 15
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 2
+  activeDeadlineSeconds: 14400
+  # -- Valid values: "OnFailure", "Never"
+  restartPolicy: "Never"
+  backoffLimit: 0
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+environment:
+  MONITORING: 'anodot'
+  LOG_TO_CLOUD_WATCH: 'true'
+
+  #NOTICE: THESE ARE EXAMPLE VALUES, PUT ACTUAL VALUES INSTEAD
+  CLUSTER_NAME: 'cluster-name'
+#  INITIAL_OFFSET: "1657284343"
+  INTERVAL: "1h"
+  PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
+  CUSTOMER_NAME: 'customer-name'
+  AWS_REGION: 'your-region'
+  S3_BUCKET: 'your-bucket'
+  AWS_ACCESS_KEY_ID: 'your-access-key-id'
+  AWS_SECRET_ACCESS_KEY: 'your-secret-access-key'
+  MONITORING_TOKEN: 'anodot-monitoring-token'
+  ACCOUNT_ID: 'your-account-id'
+  LINKED_ACCOUNT_ID: 'your-linked-account-id'
+  CLOUD_PROVIDER: 'your-cloud-provider: aws, azure'
+
+  CRON_SCHEDULE: "0 * * * *"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+prometheusrule:
+  enabled: true
+  prometheus:
+    namespace: default
+    labels:
+      release: prometheus
+      app: kube-prometheus-stack
+  groups:
+    - name: k8s-metrics-collector
+      rules:
+        - record: node_memory_UsageTotal_bytes
+          expr: node_memory_MemTotal_bytes - node_memory_MemFree_bytes
+#          todo
+#    - name: k8s-metrics-collector
+#      rules:
+#        - record: pod_memory_UsageTotal_bytes
+#          expr: sum(container_memory_usage_bytes) by (node,pod)

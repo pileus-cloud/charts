@@ -1,0 +1,27 @@
+{{- if .Values.prometheusrule.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    {{- toYaml .Values.prometheusrule.prometheus.labels | nindent 4 }}
+  name: {{ include "k8s-metrics-collector.fullname" . }}
+  namespace: {{ .Values.prometheusrule.prometheus.namespace }}
+spec:
+  groups:
+    {{- range .Values.prometheusrule.groups }}
+    - name: {{ .name }}
+      rules:
+        {{- range .rules }}
+        - expr: {{ .expr }}
+          {{- if .labels }}
+          labels:
+          {{- toYaml .labels | nindent 12 }}
+          {{- end }}
+          record: {{ .record }}
+          {{- if .annotations }}
+          annotations:
+            {{- toYaml .annotations | nindent 12 }}
+          {{- end }}
+        {{- end }}
+    {{- end }}
+  {{- end }}

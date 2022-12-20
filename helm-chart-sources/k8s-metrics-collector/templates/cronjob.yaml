@@ -1,0 +1,57 @@
+{{- if eq .Values.workload  "CronJob" }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "k8s-metrics-collector.fullname" . }}
+  labels:
+    {{- include "k8s-metrics-collector.labels" . | nindent 4 }}
+spec:
+  schedule: "{{ .Values.CronJob.schedule }}"
+  concurrencyPolicy: {{ .Values.CronJob.concurrencyPolicy }}
+  startingDeadlineSeconds: {{ .Values.CronJob.startingDeadlineSeconds }}
+  failedJobsHistoryLimit: {{ .Values.CronJob.failedJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ .Values.CronJob.successfulJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      backoffLimit: {{ .Values.CronJob.backoffLimit }}
+      template:
+        metadata:
+          labels:
+            {{- include "k8s-metrics-collector.labels" . | nindent 12 }}
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          activeDeadlineSeconds: {{ .Values.CronJob.activeDeadlineSeconds }}
+          restartPolicy: {{ .Values.CronJob.restartPolicy }}
+          serviceAccountName: {{ include "k8s-metrics-collector.serviceAccountName" . }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ .Chart.Name }}
+              securityContext:
+                {{- toYaml .Values.securityContext | nindent 16 }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              env:
+                - name: WORKLOAD
+                  value: {{ .Values.workload }}
+              envFrom:
+                - secretRef:
+                    name: {{ include "k8s-metrics-collector.fullname" . }}
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+{{- end }}

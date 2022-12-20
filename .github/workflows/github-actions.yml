@@ -15,7 +15,7 @@ jobs:
     needs: [lint]
     strategy:
       matrix:
-        k8s: [ 1.23, 1.24, 1.25 ]
+        k8s: [ 1.21, 1.23, 1.24, 1.25 ]
 
     runs-on: ubuntu-latest
     steps:
@@ -28,20 +28,18 @@ jobs:
           sudo microk8s status --wait-ready
           sudo microk8s enable helm3
 
-      - name: Test cw-agent chart
+      - name: permissions
+        run: chmod +x test-chart.sh
+
+      - name: Test anodot-cost-k8s-cw-agent chart
+        run: ./test-chart.sh anodot-cost-k8s-cw-agent
+
+      # Needed to test PrometheusRule
+      - name: Install kube-prometheus-stack
         run: |
-          sudo microk8s helm3 upgrade -i --atomic anodot-cost-k8s-cw-agent helm-chart-sources/anodot-cost-k8s-cw-agent
+          sudo microk8s helm3 repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          sudo microk8s helm3 repo update
+          sudo microk8s helm3 install --set grafana.enabled=false --set alertmanager.enabled=false kube-prometheus-stack prometheus-community/kube-prometheus-stack
 
-          export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}') 
-          while [ $STATUS == "ContainerCreating" ]
-          do
-            export STATUS=$(sudo microk8s kubectl get po | grep anodot-cost-k8s-cw-agent | awk '{print $3}')
-            sleep 1
-          done          
-
-          sudo microk8s kubectl get po
-      
-          if [ $STATUS != "Running" ]
-          then 
-            exit 1
-          fi
+      - name: Test k8s-metrics-collector chart
+        run: ./test-chart.sh k8s-metrics-collector
