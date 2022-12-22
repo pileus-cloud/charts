@@ -1,5 +1,7 @@
 # Kubernetes Metrics Collector Installation Guide
 
+Please notice that this agent should be installed **per cluster**. This is done in order to reduce the load. We are assuming that each cluster has a separate Prometheus or Thanos instance. 
+
 ## Prerequisities:
 
 - Helm 3
