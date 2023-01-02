@@ -1,9 +1,16 @@
 # Installation
 
-## Add repository by running 
+## Add or update the Anodot repository 
 
+Add the Anodot repository by running:
 ```shell
 helm repo add anodot https://pileus-cloud.github.io/charts
+```
+
+If it was already added before, make sure it is updated by running:
+
+```shell
+helm repo update anodot
 ```
 
 ## Running installation
