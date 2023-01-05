@@ -2,6 +2,11 @@
 
 Please notice that this agent should be installed **per cluster**. This is done in order to reduce the load. We are assuming that each cluster has a separate Prometheus or Thanos instance. 
 
+## Compatability
+
+- We currently support `Thanos 0.28` and `Thanos 0.29`
+
+
 ## Prerequisities:
 
 - Helm 3
