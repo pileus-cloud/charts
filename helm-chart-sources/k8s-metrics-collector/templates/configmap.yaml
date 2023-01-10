@@ -1,0 +1,24 @@
+{{- if .Values.configmap.enabled }}
+{{- if or .Values.configmap.files .Values.configmap.binaryFiles }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "k8s-metrics-collector.fullname" . }}
+  labels:
+    {{- include "k8s-metrics-collector.labels" . | nindent 4 }}
+data:
+{{- range .Values.configmap.files }}
+{{- range $key, $value := .data }}
+  {{ $key }}: |-
+{{ $value | indent 4 }}
+{{- end }}
+{{- end }}
+binaryData:
+{{- range .Values.configmap.binaryFiles }}
+{{- range $key, $value := .data }}
+  {{ $key }}: |-
+{{ $value | indent 4 }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
