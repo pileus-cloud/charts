@@ -5,6 +5,9 @@ metadata:
   name: {{ include "k8s-metrics-collector.fullname" . }}
   labels:
     {{- include "k8s-metrics-collector.labels" . | nindent 4 }}
+    {{- with .Values.additionalLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   schedule: "{{ .Values.CronJob.schedule }}"
   concurrencyPolicy: {{ .Values.CronJob.concurrencyPolicy }}
@@ -18,6 +21,9 @@ spec:
         metadata:
           labels:
             {{- include "k8s-metrics-collector.labels" . | nindent 12 }}
+            {{- with .Values.additionalLabels }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
         spec:
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
@@ -40,8 +46,39 @@ spec:
               envFrom:
                 - secretRef:
                     name: {{ include "k8s-metrics-collector.fullname" . }}
+              volumeMounts:
+                {{- if .Values.configmap.enabled }}
+                {{- if .Values.configmap.files }}
+                {{- range .Values.configmap.files }}
+                - mountPath: {{ .mountPath }}
+                  name: files
+                  {{- range $name, $value := .data }}
+                  subPath: ..data/{{ $name }}
+                  {{- end }}
+                {{- end }}
+                {{- end }}
+                {{- if .Values.configmap.binaryFiles }}
+                {{- range .Values.configmap.binaryFiles }}
+                - mountPath: {{ .mountPath }}
+                  name: files
+                  {{- range $name, $value := .data }}
+                  subPath: ..data/{{ $name }}
+                  {{- end }}
+                {{- end }}
+                {{- end }}
+                {{- end }}
+
               resources:
                 {{- toYaml .Values.resources | nindent 16 }}
+          volumes:
+          {{- if .Values.configmap.enabled  }}
+          {{- if or .Values.configmap.files .Values.configmap.binaryFiles }}
+            - name: files
+              configMap:
+                name: {{ include "k8s-metrics-collector.fullname" . }}
+          {{- end }}
+          {{- end }}
+
           {{- with .Values.nodeSelector }}
           nodeSelector:
             {{- toYaml . | nindent 12 }}
