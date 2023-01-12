@@ -39,6 +39,11 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+# 
+environmentVars:
+  # Type could be 'secret' or 'env'
+  type: secret
+
 environment:
   MONITORING: 'anodot'
   LOG_TO_CLOUD_WATCH: 'true'
