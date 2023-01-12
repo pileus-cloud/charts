@@ -53,15 +53,6 @@ environment:
 #  INITIAL_OFFSET: "1657284343"
   INTERVAL: "1h"
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
-  CUSTOMER_NAME: 'customer-name'
-  AWS_REGION: 'your-region'
-  S3_BUCKET: 'your-bucket'
-  AWS_ACCESS_KEY_ID: 'your-access-key-id'
-  AWS_SECRET_ACCESS_KEY: 'your-secret-access-key'
-  MONITORING_TOKEN: 'anodot-monitoring-token'
-  ACCOUNT_ID: 'your-account-id'
-  LINKED_ACCOUNT_ID: 'your-linked-account-id'
-  CLOUD_PROVIDER: 'your-cloud-provider: aws, azure'
 
   CRON_SCHEDULE: "0 * * * *"
 
