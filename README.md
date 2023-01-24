@@ -1,6 +1,8 @@
 # Kubernetes Metrics Collector Installation Guide
 
-Please notice that this agent should be installed **per cluster**. This is done in order to reduce the load. We are assuming that each cluster has a separate Prometheus or Thanos instance. 
+~~Please notice that this agent should be installed **per cluster**. This is done in order to reduce the load. We are assuming that each cluster has a separate Prometheus or Thanos instance. ~~
+
+The above limitation is no longer valid. You can install the agent installed cross clusters.
 
 ## Prerequisities:
 
