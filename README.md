@@ -55,8 +55,8 @@ environment:
   # customer name in pileus system
   CUSTOMER_NAME: 'customer-name'
   # bucket name and region where the bucket is located for data destination 
-  AWS_REGION: 'bucket-region'
-  S3_BUCKET: 's3-bucket'
+  AWS_REGION: 'us-east-1'
+  S3_BUCKET: 'prod-prometheus-agent'
   # access keys or role arn to access our bucket
   # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customername-agent-role'
   AWS_ACCESS_KEY_ID: 'your-access-key-id-for-the-bucket'
