@@ -38,23 +38,35 @@ image:
 workload: Deployment
 
 environment:
-  MONITORING: 'anodot'
+  MONITORING: 'dummy'
   LOG_TO_CLOUD_WATCH: 'true'
 
   # Put your values here
+  # prometheus or thanos url
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
+  # if you use thanos - specify a condition to add to the queriees to take data only for your specific clusteer
+  # METRIC_CONDITION: 'cluster="cluster_name"'
+  # name of your EKS cluster ad it is in the aws
   CLUSTER_NAME: 'your-cluster-name'
+  # if you use thanos - specify a condition to add to the queriees to take data only for your specific clusteer
+  # METRIC_CONDITION: 'cluster="cluster_name"'
+  # id of your root account
   ACCOUNT_ID: 'your-account-id'
+  # id of your linked account
   LINKED_ACCOUNT_ID: 'your-linked-account-id'
-  CLOUD_PROVIDER: 'your-cloud-provider: aws, azure'
+  CLOUD_PROVIDER: 'aws'
   
   # Provided by anodot
+  # customer name in pileus system
   CUSTOMER_NAME: 'customer-name'
+  # bucket name and region where the bucket is located for data destination 
   AWS_REGION: 'bucket-region'
   S3_BUCKET: 's3-bucket'
+  # access keys or role arn to access our bucket
+  # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customername-agent-role'
   AWS_ACCESS_KEY_ID: 'your-access-key-id-for-the-bucket'
   AWS_SECRET_ACCESS_KEY: 'your-secret-access-key-for-the-bucket'
-  MONITORING_TOKEN: 'anodot-monitoring-token'
+
 
 podAnnotations: {}
 
