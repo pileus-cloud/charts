@@ -102,3 +102,20 @@ helm install k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.y
 ```
 
 5. Verify that the pod is up and running. 
+
+
+### Resources required:
+
+Recommended limits/requests:
+
+```
+    Limits:
+      cpu:     100m
+      memory:  500Mi
+    Requests:
+      cpu:     100m
+      memory:  500Mi
+```
+This was tested on ~100000 metrics. The agent might require a larger amount of resources in case of having to process a larger amount of data.
+
+
