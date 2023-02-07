@@ -10,19 +10,14 @@ Please notice that this agent should be installed **per cluster**. This is done 
 
 ## Installation:
 
-1. Add Anodot repository by running next command:
 
-```bash
-helm repo add anodot https://anodot.github.io/helm-charts
-```
-
-2. Add Metrics collector repo:
+1. Add Metrics collector repo:
 
 ```bash
 helm repo add anodot-cost https://pileus-cloud.github.io/charts
 ```
 
-3. Create a values file and put relevant config
+2. Create a values file and put relevant config
 
 _values.yaml_
 
