@@ -27,10 +27,21 @@ _values.yaml_
 # Declare variables to be passed into your templates.
 
 image:
-  tag: "0.2.20"
+  tag: "0.2.28"
 
 # workload: Deployment or CronJob
-workload: Deployment
+workload: CronJob
+
+CronJob:
+  schedule: "0 * * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 15
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 3
+  activeDeadlineSeconds: 14400
+  # -- Valid values: "OnFailure", "Never"
+  restartPolicy: "Never"
+  backoffLimit: 0
 
 environment:
   MONITORING: 'dummy'
@@ -39,11 +50,9 @@ environment:
   # Put your values here
   # prometheus or thanos url
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
-  # if you use thanos - specify a condition to add to the queriees to take data only for your specific clusteer
-  # METRIC_CONDITION: 'cluster="cluster_name"'
   # name of your EKS cluster ad it is in the aws
   CLUSTER_NAME: 'your-cluster-name'
-  # if you use thanos - specify a condition to add to the queriees to take data only for your specific clusteer
+  # if you use thanos - specify a condition to add to the queries to take data only for your specific cluster
   # METRIC_CONDITION: 'cluster="cluster_name"'
   # id of your root account
   ACCOUNT_ID: 'your-account-id'
@@ -98,11 +107,20 @@ affinity: {}
 4. Install the chart
 
 ```bash
-helm install k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.yaml
+helm upgrade --install --create-namespace -n monitoring k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.yaml
 ```
 
 5. Verify that the pod is up and running. 
 
+For the Deployment workload type:
+```bash
+kubectl get pods -n monitoring | grep k8s-metrics-collector
+```
+
+For the CronJob workload type:
+```bash
+kubectl get cronjob -n monitoring | grep k8s-metrics-collector
+```
 
 ### Resources required:
 
@@ -117,5 +135,3 @@ Recommended limits/requests:
       memory:  500Mi
 ```
 This was tested on ~100000 metrics. The agent might require a larger amount of resources in case of having to process a larger amount of data.
-
-
