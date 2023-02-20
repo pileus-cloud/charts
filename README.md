@@ -61,6 +61,8 @@ CronJob:
   backoffLimit: 0
 
 environment:
+  CRON_SCHEDULE: : "0 * * * *"
+  
   MONITORING: 'dummy'
   LOG_TO_CLOUD_WATCH: 'true'
 
