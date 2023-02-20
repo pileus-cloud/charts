@@ -5,9 +5,9 @@ Please notice that this agent should be installed **per cluster**. This is done 
 ## Prerequisities:
 
 - Helm 3
-- `kube-prometheus-stack` installed. See the installation steps [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack).
+- `kube-prometheus-stack` installed. See the installation steps [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) (also see the k8s labels collection note below).
 
-Also agent requires Prometheus to collect k8s labels, the collection is disabled by default. To enable it you need to add and extra argument --metric-labels-allowlist=pods=[*] to kube-state-metrics
+Also agent requires Prometheus to collect k8s labels, the collection is disabled by default. To enable it you need to add and extra argument `--metric-labels-allowlist=pods=[*]` to kube-state-metrics
 If you are using a helm chart, add it like this:
 ```
 kube-state-metrics:
