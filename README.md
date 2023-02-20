@@ -44,7 +44,7 @@ _values.yaml_
 # Declare variables to be passed into your templates.
 
 image:
-  tag: "0.2.28"
+  tag: "0.3.1"
 
 # workload: Deployment or CronJob
 workload: CronJob
@@ -82,8 +82,7 @@ environment:
   # Provided by anodot
   # customer name in pileus system
   CUSTOMER_NAME: 'customer-name'
-  # bucket name and region where the bucket is located for data destination 
-  AWS_REGION: 'us-east-1'
+  # bucket name of the Pileus destination bucket
   S3_BUCKET: 'prod-prometheus-agent'
   # access keys or role arn to access our bucket
   # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customername-agent-role'
