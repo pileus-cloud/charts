@@ -8,6 +8,7 @@ Please notice that this agent should be installed **per cluster**. This is done 
 - `kube-prometheus-stack` installed. See the installation steps [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) (also see the k8s labels collection note below).
 
 Also agent requires Prometheus to collect k8s labels, the collection is disabled by default. To enable it you need to add and extra argument `--metric-labels-allowlist=pods=[*]` to kube-state-metrics
+
 If you are using a helm chart, add it like this:
 ```
 kube-state-metrics:
@@ -15,11 +16,12 @@ kube-state-metrics:
     - --metric-labels-allowlist=pods=[*]
 ```
 and after that upgrade your prometheus stack.
+
 If you’d like to update without using a helm chart, add it to the command like this:
 ```
 helm upgrade <your> <other> <arguments> --set kube-state-metrics.extraArgs[0]=--metric-labels-allowlist=pods=[*]
 ```
-For Azure installation node labels are also required, so --metric-labels-allowlist=pods=[*] will be changed to --metric-labels-allowlist=pods=[*],nodes=[*]
+For Azure installation node labels are also required, so `--metric-labels-allowlist=pods=[*]` will be changed to `--metric-labels-allowlist=pods=[*],nodes=[*]`
 
 
 
