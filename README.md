@@ -136,12 +136,22 @@ helm upgrade --install --create-namespace -n monitoring k8s-metrics-collector an
 
 For the Deployment workload type:
 ```bash
-kubectl get pods -n monitoring | grep k8s-metrics-collector
+kubectl -n monitoring get pods | grep k8s-metrics-collector
+kubectl -n monitoring logs -f <k8s-metrics-collector-pod-name>
 ```
 
 For the CronJob workload type:
 ```bash
-kubectl get cronjob -n monitoring | grep k8s-metrics-collector
+kubectl -n monitoring get cronjob | grep k8s-metrics-collector
+```
+Usually the CronJob runs hourly, so it will create the pod only at 0 minutes of the next hour. In order to verify installation you can create a job manually:
+```
+kubectl -n monitoring create job --from=cronjob/k8s-metrics-collector k8s-metrics-collector-manual-run
+```
+And then
+```
+kubectl get pods -n monitoring | grep k8s-metrics-collector
+kubectl -n monitoring logs -f <k8s-metrics-collector-pod-name>
 ```
 
 ### Resources required:
