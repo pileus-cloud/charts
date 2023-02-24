@@ -134,13 +134,13 @@ helm upgrade --install --create-namespace -n monitoring k8s-metrics-collector an
 
 5. Verify that the pod is up and running. 
 
-For the Deployment workload type:
+*For the Deployment workload type*:
 ```bash
 kubectl -n monitoring get pods | grep k8s-metrics-collector
 kubectl -n monitoring logs -f <k8s-metrics-collector-pod-name>
 ```
 
-For the CronJob workload type:
+*For the CronJob workload type*:
 ```bash
 kubectl -n monitoring get cronjob | grep k8s-metrics-collector
 ```
