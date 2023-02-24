@@ -4,24 +4,23 @@ Please notice that this agent should be installed **per cluster**. This is done 
 
 ## Prerequisities:
 
-- Helm 3
-- `kube-prometheus-stack` installed. See the installation steps [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) (also see the k8s labels collection note below).
+- `Helm 3`
+- `kube-prometheus-stack`. Installation instructions can be found [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) (please also notice the k8s labels collection note below).
 
-Agent requires Prometheus to collect k8s labels, the collection is disabled by default. To enable it you need to add and extra argument `--metric-labels-allowlist=pods=[*],nodes=[*]` to kube-state-metrics
+Agent requires Prometheus to collect k8s labels, the collection is disabled by default. To enable it add the extra argument `--metric-labels-allowlist=pods=[*],nodes=[*]` to `kube-state-metrics`.
 
-If you are using a helm chart, add it like this:
+If you are using a Helm chart:
 ```
 kube-state-metrics:
   extraArgs:
     - --metric-labels-allowlist=pods=[*],nodes=[*]
 ```
-and after that upgrade your prometheus stack.
+and after that upgrade the Prometheus stack installation.
 
-If you’d like to update without using a helm chart, add it to the command like this:
+If you’d like to upgrate without using a Helm chart, add it to the command:
 ```
 helm upgrade <your> <other> <arguments> --set kube-state-metrics.extraArgs[0]=--metric-labels-allowlist=pods=[*],nodes=[*]
 ```
-
 
 
 ## Installation:
