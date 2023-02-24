@@ -38,14 +38,14 @@ helm repo add anodot-cost https://pileus-cloud.github.io/charts
 _values.yaml_
 
 ```yaml
-# Default values for k8s-metrics-collector.
 # This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
 
 image:
-  tag: "0.3.1"
+  repository: public.ecr.aws/i5o6o6d7/k8s-metrics-agent
+  pullPolicy: IfNotPresent
+  tag: "0.3.2"
 
-# workload: Deployment or CronJob
+# workload type: Deployment or CronJob
 workload: CronJob
 
 CronJob:
@@ -60,33 +60,39 @@ CronJob:
   backoffLimit: 0
 
 environment:
-  CRON_SCHEDULE: : "0 * * * *"
+  # Needed only for the Deployment workload
+  # CRON_SCHEDULE: : "0 * * * *"
   
-  MONITORING: 'dummy'
+  # Monitoring support coming soon
+  MONITORING: 'none'
   LOG_TO_CLOUD_WATCH: 'true'
 
-  # Put your values here
-  # prometheus or thanos url
+  # Prometheus or Thanos URL
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
-  # name of your EKS cluster ad it is in the aws
+  
+  # Name of the cluster that will be monitored
   CLUSTER_NAME: 'your-cluster-name'
-  # if you use thanos - specify a condition to add to the queries to take data only for your specific cluster
+  
+  # When using Thanos specify a condition, that will filter results by labels, to fetch data only of a specific cluster
   # METRIC_CONDITION: 'cluster="cluster_name"'
-  # id of your root account
-  ACCOUNT_ID: 'your-account-id'
-  # id of your linked account
-  LINKED_ACCOUNT_ID: 'your-linked-account-id'
+  
+  # ID of your AWS root account
+  ACCOUNT_ID: 'account-id'
+  
+  # ID of your AWS linked account
+  LINKED_ACCOUNT_ID: 'linked-account-id'
+  
   CLOUD_PROVIDER: 'aws'
   
-  # Provided by anodot
-  # customer name in pileus system
-  CUSTOMER_NAME: 'customer-name'
-  # bucket name of the Pileus destination bucket
+  # Provided by Anodot:
+  
+  # Bucket name of the Pileus destination bucket
   S3_BUCKET: 'prod-prometheus-agent'
-  # access keys or role arn to access our bucket
-  # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customername-agent-role'
-  AWS_ACCESS_KEY_ID: 'your-access-key-id-for-the-bucket'
-  AWS_SECRET_ACCESS_KEY: 'your-secret-access-key-for-the-bucket'
+  
+  # Access keys or role ARN to access Pileus AWS
+  # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customer-agent-role'
+  AWS_ACCESS_KEY_ID: 'access-key-id'
+  AWS_SECRET_ACCESS_KEY: 'secret-access-key'
 
 
 podAnnotations: {}
