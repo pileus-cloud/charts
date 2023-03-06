@@ -7,13 +7,19 @@ Please notice that this agent should be installed **per cluster**. This is done 
 - `Helm 3`
 - `kube-prometheus-stack`. Installation instructions can be found [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) (please also notice the k8s labels collection note below).
 
-Minimum supported versions:
-community `kube-prometheus-stack` chart - 13.11.0
+### Minimum supported versions
+
+Community `kube-prometheus-stack` chart - 13.11.0
+
+Specific app versions (same as used in the chart above):
 
 `node-exporter` - 1.0.1
+
 `prometheus` - 2.24
+
 `kube-state-metrics` - 1.9.7
 
+### Labels collection
 Agent requires Prometheus to collect k8s labels, the collection is disabled by default. To enable it add the extra argument `--metric-labels-allowlist=pods=[*],nodes=[*]` to `kube-state-metrics`.
 
 If you are using a Helm chart:
