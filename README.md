@@ -55,7 +55,7 @@ _values.yaml_
 image:
   repository: public.ecr.aws/i5o6o6d7/k8s-metrics-agent
   pullPolicy: IfNotPresent
-  tag: "0.3.2"
+  tag: "0.3.3"
 
 # workload type: Deployment or CronJob
 workload: CronJob
