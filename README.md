@@ -17,28 +17,25 @@ Please notice that this agent should be installed **per cluster**. This is done 
 
 ### Minimum supported versions
 
-Community `kube-prometheus-stack` chart - 13.11.0
+- Community `kube-prometheus-stack` chart - 13.11.0
 
 Specific app versions (same as used in the chart above):
 
-`node-exporter` - 1.0.1
-
-`prometheus` - 2.24
-
-`kube-state-metrics` - 1.9.7
+- `node-exporter` - 1.0.1
+- `prometheus` - 2.24
+- `kube-state-metrics` - 1.9.7
 
 ### Labels collection
 Agent requires Prometheus to collect k8s labels, the collection is disabled by default. To enable it add the extra argument `--metric-labels-allowlist=pods=[*],nodes=[*]` to `kube-state-metrics`.
 
-If you are using a Helm chart:
+If you are using a Helm chart, add the following to the values file:
 ```
 kube-state-metrics:
   extraArgs:
     - --metric-labels-allowlist=pods=[*],nodes=[*]
 ```
-and after that upgrade the Prometheus stack installation.
 
-If you’d like to upgrate without using a Helm chart, add it to the command:
+If you’d like to upgrade without using a custom `values.yaml` file (not recommended), add it in the command line:
 ```
 helm upgrade <your> <other> <arguments> --set kube-state-metrics.extraArgs[0]=--metric-labels-allowlist=pods=[*],nodes=[*]
 ```
@@ -62,13 +59,13 @@ helm upgrade --install --create-namespace -n monitoring k8s-metrics-collector an
 
 4. Verify that the pod is up and running. 
 
-**For the Deployment workload type**:
+For the Deployment workload type:
 ```bash
 kubectl -n monitoring get pods | grep k8s-metrics-collector
 kubectl -n monitoring logs -f <k8s-metrics-collector-pod-name>
 ```
 
-**For the CronJob workload type**:
+For the CronJob workload type:
 ```bash
 kubectl -n monitoring get cronjob | grep k8s-metrics-collector
 ```
