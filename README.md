@@ -2,10 +2,18 @@
 
 Please notice that this agent should be installed **per cluster**. This is done in order to reduce the load. We are assuming that each cluster has a separate Prometheus or Thanos instance. 
 
-## Prerequisities:
+- [Prerequisites](#prerequisites)
+  * [Minimum supported versions](#minimum-supported-versions)
+  * [Labels collection](#labels-collection)
+- [Installation](#installation)
+  * [Storing secrets](#storing-secrets)
+- [Resources required](#resources-required)
+
+## Prerequisites
 
 - `Helm 3`
-- `kube-prometheus-stack`. Installation instructions can be found [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) (please also notice the k8s labels collection note below).
+- `kube-prometheus-stack`. Installation instructions can be found [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), please also notice the k8s labels collection note below. Also you might want to disable Grafana installation since it's not used by our app.
+- k8s-metrics-collector should be able to access our AWS from your k8s cluster. Secrets needed for authentication will be provided by us.
 
 ### Minimum supported versions
 
@@ -36,8 +44,7 @@ helm upgrade <your> <other> <arguments> --set kube-state-metrics.extraArgs[0]=--
 ```
 
 
-## Installation:
-
+## Installation
 
 1. Add Metrics collector repo:
 
@@ -45,107 +52,15 @@ helm upgrade <your> <other> <arguments> --set kube-state-metrics.extraArgs[0]=--
 helm repo add anodot-cost https://pileus-cloud.github.io/charts
 ```
 
-2. Create a values file and put relevant config
+2. Put relevant configuration in [values.yaml](https://github.com/pileus-cloud/charts/blob/main/helm-chart-sources/k8s-metrics-collector/values.yaml) file. In most cases only environment variables need to be set, they are marked with comments in the values file.
 
-_values.yaml_
-
-```yaml
-# This is a YAML-formatted file.
-
-image:
-  repository: public.ecr.aws/i5o6o6d7/k8s-metrics-agent
-  pullPolicy: IfNotPresent
-  tag: "0.3.3"
-
-# workload type: Deployment or CronJob
-workload: CronJob
-
-CronJob:
-  schedule: "0 * * * *"
-  concurrencyPolicy: Forbid
-  startingDeadlineSeconds: 15
-  failedJobsHistoryLimit: 3
-  successfulJobsHistoryLimit: 3
-  activeDeadlineSeconds: 14400
-  # -- Valid values: "OnFailure", "Never"
-  restartPolicy: "Never"
-  backoffLimit: 0
-
-environment:
-  # Needed only for the Deployment workload
-  # CRON_SCHEDULE: : "0 * * * *"
-  
-  # Monitoring support coming soon
-  MONITORING: 'none'
-  LOG_TO_CLOUD_WATCH: 'true'
-
-  # Prometheus or Thanos URL
-  PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
-  
-  # Name of the cluster that will be monitored
-  CLUSTER_NAME: 'your-cluster-name'
-  
-  # When using Thanos specify a condition, that will filter results by labels, to fetch data only of a specific cluster
-  # METRIC_CONDITION: 'cluster="cluster_name"'
-  
-  # ID of your AWS root account
-  ACCOUNT_ID: 'account-id'
-  
-  # ID of your AWS linked account
-  LINKED_ACCOUNT_ID: 'linked-account-id'
-  
-  CLOUD_PROVIDER: 'aws'
-  
-  # Provided by Anodot:
-  
-  # Bucket name of the Pileus destination bucket
-  S3_BUCKET: 'prod-prometheus-agent'
-  
-  # Access keys or role ARN to access Pileus AWS
-  # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customer-agent-role'
-  AWS_ACCESS_KEY_ID: 'access-key-id'
-  AWS_SECRET_ACCESS_KEY: 'secret-access-key'
-
-
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-```
-
-4. Install the chart
+3. Install the chart
 
 ```bash
 helm upgrade --install --create-namespace -n monitoring k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.yaml
 ```
 
-5. Verify that the pod is up and running. 
+4. Verify that the pod is up and running. 
 
 **For the Deployment workload type**:
 ```bash
@@ -167,7 +82,10 @@ kubectl get pods -n monitoring | grep k8s-metrics-collector
 kubectl -n monitoring logs -f <k8s-metrics-collector-pod-name>
 ```
 
-### Resources required:
+### Storing secrets
+It is recommended to use [external secrets](https://github.com/external-secrets/external-secrets) (or a similar tool) to store secrets and reference them in the values file. It supports multiple backends, like AWS KMS, GCP KMS, Azure Key Vault, Hashicorp Vault, etc.
+
+## Resources required
 
 Recommended limits/requests:
 
