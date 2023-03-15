@@ -20,12 +20,15 @@ CronJob:
 environment:
   # Needed only for the Deployment workload
   # CRON_SCHEDULE: : "0 * * * *"
+
+  # Bucket name of the Pileus destination bucket
+  S3_BUCKET: 'prod-prometheus-agent'
   
   # Monitoring support coming soon
   MONITORING: 'none'
   LOG_TO_CLOUD_WATCH: 'true'
 
-  # Prometheus or Thanos URL
+  # Prometheus or Thanos URL, might be different for your cluster depending on the service name, namespace and port
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
   
   # Name of the cluster that will be monitored
@@ -43,10 +46,7 @@ environment:
   CLOUD_PROVIDER: 'aws'
   
   # Provided by Anodot:
-  
-  # Bucket name of the Pileus destination bucket
-  S3_BUCKET: 'prod-prometheus-agent'
-  
+
   # Access keys or role ARN to access Pileus AWS
   # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customer-agent-role'
   AWS_ACCESS_KEY_ID: 'access-key-id'
