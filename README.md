@@ -80,7 +80,7 @@ kubectl -n monitoring logs -f <k8s-metrics-collector-pod-name>
 ```
 
 ### Storing secrets
-It is recommended to use [external secrets](https://github.com/external-secrets/external-secrets) (or a similar tool) to store secrets and reference them in the values file. It supports multiple backends, like AWS KMS, GCP KMS, Azure Key Vault, Hashicorp Vault, etc.
+It is recommended to use [external secrets](https://github.com/external-secrets/external-secrets), [helm secrets](https://github.com/jkroepke/helm-secrets) or a similar tool to store secrets encrypted and use them in the values file.
 
 ## Resources required
 
