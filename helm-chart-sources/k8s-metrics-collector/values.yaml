@@ -83,3 +83,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+prometheusrule:
+  enabled: false
+
+configmap:
+   enabled: false
