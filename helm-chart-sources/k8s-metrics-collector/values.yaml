@@ -31,7 +31,7 @@ environment:
   # Prometheus or Thanos URL, might be different for your cluster depending on the service name, namespace and port
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
   
-  # Name of the cluster that will be monitored
+  # Name of the cluster where k8s-metrics-collector is installed, should match the name of the cluster in your cloud
   CLUSTER_NAME: 'your-cluster-name'
   
   # When using Thanos specify a condition, that will filter results by labels, to fetch data only of a specific cluster
