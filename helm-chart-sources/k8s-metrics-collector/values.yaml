@@ -21,7 +21,7 @@ environment:
   # Needed only for the Deployment workload
   # CRON_SCHEDULE: : "0 * * * *"
 
-  # Bucket name of the Pileus destination bucket
+  # Bucket name of the Anodot destination bucket
   S3_BUCKET: 'prod-prometheus-agent'
   
   # Monitoring support coming soon
@@ -47,7 +47,7 @@ environment:
   
   # Provided by Anodot:
 
-  # Access keys or role ARN to access Pileus AWS
+  # Access keys or role ARN to access Anodot AWS
   # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customer-agent-role'
   AWS_ACCESS_KEY_ID: 'access-key-id'
   AWS_SECRET_ACCESS_KEY: 'secret-access-key'
