@@ -12,7 +12,7 @@ Please notice that this agent should be installed **per cluster**. This is done 
 ## Prerequisites
 
 - `Helm 3`
-- `kube-prometheus-stack`. Installation instructions can be found [here](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), please also notice the k8s labels collection note below. Also, you might want to disable installation of Grafana and alertmanager since they are not used by our app. You can do it by setting `enabled: false` in the kube-prometheus-stack values file for them.
+- `prometheus` and `kube-state-metrics`. They can be installed from [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), please also notice the k8s labels collection note below.
 - k8s-metrics-collector should be able to access our AWS from your k8s cluster where it is installed. Secrets needed for authentication will be provided by us.
 
 ### Minimum supported versions
@@ -21,7 +21,6 @@ Please notice that this agent should be installed **per cluster**. This is done 
 
 Specific app versions (same as used in the chart above):
 
-- `node-exporter` - 1.0.1
 - `prometheus` - 2.24
 - `kube-state-metrics` - 1.9.7
 
