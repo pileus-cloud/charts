@@ -18,39 +18,39 @@ CronJob:
   backoffLimit: 0
 
 environment:
+  # ========= PLACE YOUR OWN VALUES HERE: =========
+
+  # should match the name of the cluster in your cloud
+  CLUSTER_NAME: '<name of the cluster the chart is being installed to>'
+
+  ACCOUNT_ID: '<ID of your AWS root account>'
+  LINKED_ACCOUNT_ID: '<ID of your AWS linked account which owns the cluster>'
+
+  CLOUD_PROVIDER: 'aws'
+
+  # Provided by Anodot:
+  # ROLE_ARN: '<role ARN to access Anodot AWS>'
+  AWS_ACCESS_KEY_ID: '<access key for Anodot AWS>'
+  AWS_SECRET_ACCESS_KEY: '<secret access key for Anodot AWS>'
+
+  # Prometheus or Thanos URL, might be different for your cluster depending on the service name, namespace and port
+  PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
+
+  # When using Thanos specify a condition, that will filter results by labels, to fetch data only of a specific cluster
+  # METRIC_CONDITION: 'cluster="cluster_name"'
+
   # Needed only for the Deployment workload
   # CRON_SCHEDULE: : "0 * * * *"
+
+  # ========= THE NEXT VALUES USUALLY DO NOT NEED TO BE CHANGED =========
 
   # Bucket name of the Anodot destination bucket
   S3_BUCKET: 'prod-prometheus-agent'
   
   # Monitoring support coming soon
   MONITORING: 'none'
+
   LOG_TO_CLOUD_WATCH: 'true'
-
-  # Prometheus or Thanos URL, might be different for your cluster depending on the service name, namespace and port
-  PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
-  
-  # Name of the cluster where k8s-metrics-collector is installed, should match the name of the cluster in your cloud
-  CLUSTER_NAME: 'your-cluster-name'
-  
-  # When using Thanos specify a condition, that will filter results by labels, to fetch data only of a specific cluster
-  # METRIC_CONDITION: 'cluster="cluster_name"'
-  
-  # ID of your AWS root account
-  ACCOUNT_ID: 'account-id'
-  
-  # ID of your AWS linked account
-  LINKED_ACCOUNT_ID: 'linked-account-id'
-  
-  CLOUD_PROVIDER: 'aws'
-  
-  # Provided by Anodot:
-
-  # Access keys or role ARN to access Anodot AWS
-  # ROLE_ARN: 'arn:aws:iam::1111222233334444:role/customer-agent-role'
-  AWS_ACCESS_KEY_ID: 'access-key-id'
-  AWS_SECRET_ACCESS_KEY: 'secret-access-key'
 
 
 podAnnotations: {}
