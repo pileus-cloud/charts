@@ -1,7 +1,7 @@
 image:
   repository: public.ecr.aws/i5o6o6d7/k8s-metrics-agent
   pullPolicy: IfNotPresent
-  tag: "0.3.4"
+  tag: "0.3.5"
 
 # workload type: Deployment or CronJob
 workload: CronJob
