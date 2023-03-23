@@ -41,17 +41,14 @@ spec:
           env:
             - name: WORKLOAD 
               value: {{ .Values.workload }}
-          {{- if eq .Values.environmentVars.type  "secret" }}
-          envFrom:
-            - secretRef:
-                name: {{ include "k8s-metrics-collector.fullname" . }}
-          {{- else }}
             {{- range $name, $value := .Values.environment }}
-            {{- if not (empty $value) }}
             - name: {{ $name }}
               value: {{ $value | quote }}
             {{- end }}
-          {{- end }}
+          envFrom:
+          {{- if eq .Values.environmentVars.type  "secret" }}
+            - secretRef:
+                name: {{ include "k8s-metrics-collector.fullname" . }}
           {{- end }}
           volumeMounts:
             {{- if .Values.configmap.enabled }}
@@ -74,7 +71,6 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
-
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
