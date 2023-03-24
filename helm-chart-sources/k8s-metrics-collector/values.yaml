@@ -7,7 +7,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-# workload type: Deployment or CronJob
+## workload type: Deployment or CronJob
 workload: CronJob
 
 CronJob:
@@ -17,27 +17,27 @@ CronJob:
   failedJobsHistoryLimit: 3
   successfulJobsHistoryLimit: 3
   activeDeadlineSeconds: 14400
-  # -- Valid values: "OnFailure", "Never"
+  ## -- Valid values: "OnFailure", "Never"
   restartPolicy: "Never"
   backoffLimit: 0
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  ## Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+  ## Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
+  ## The name of the service account to use.
+  ## If not set and create is true, a name is generated using the fullname template
   name: ""
 
 environmentVars:
-  # Type could be 'secret' or 'env'
+  ## Type could be 'secret' or 'env'
   type: env
 
 environment:
-  # ========= PLACE YOUR OWN VALUES HERE: =========
+  ## ========= PLACE YOUR OWN VALUES HERE: =========
 
-  # should match the name of the cluster in your cloud
+  ## should match the name of the cluster in your cloud
   CLUSTER_NAME: '<name of the cluster the chart is being installed to>'
 
   ACCOUNT_ID: '<ID of your AWS root account>'
@@ -45,30 +45,67 @@ environment:
 
   CLOUD_PROVIDER: 'aws'
 
-  # Provided by Anodot:
+  ## Provided by Anodot:
   # ROLE_ARN: '<role ARN to access Anodot AWS>'
-  AWS_ACCESS_KEY_ID: '<access key for Anodot AWS>'
-  AWS_SECRET_ACCESS_KEY: '<secret access key for Anodot AWS>'
+  # AWS_ACCESS_KEY_ID: '<access key for Anodot AWS>'
+  # AWS_SECRET_ACCESS_KEY: '<secret access key for Anodot AWS>'
 
-  # Prometheus or Thanos URL, might be different for your cluster depending on the service name, namespace and port
+  ## Prometheus or Thanos URL, might be different for your cluster depending on the service name, namespace and port
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
 
-  # When using Thanos specify a condition, that will filter results by labels, to fetch data only of a specific cluster
+  ## When using Thanos specify a condition, that will filter results by labels, to fetch data only of a specific cluster
   # METRIC_CONDITION: 'cluster="cluster_name"'
 
-  # Needed only for the Deployment workload
+  ## Needed only for the Deployment workload
   # CRON_SCHEDULE: : "0 * * * *"
 
-  # ========= THE NEXT VALUES USUALLY DO NOT NEED TO BE CHANGED =========
+  ## ========= THE NEXT VALUES USUALLY DO NOT NEED TO BE CHANGED =========
 
-  # Bucket name of the Anodot destination bucket
+  ## Bucket name of the Anodot destination bucket
   S3_BUCKET: 'prod-prometheus-agent'
   
-  # Monitoring support coming soon
+  ## Monitoring support coming soon
   MONITORING: 'none'
 
   LOG_TO_CLOUD_WATCH: 'true'
 
+## Configure External-secrets
+## Prerequisites: 
+## 1. Install external-secrets 
+## 2. Create SecretStore in the same k8s namespace before installing this helm chart (Details: https://external-secrets.io/v0.8.1/provider/aws-parameter-store/) 
+## 3. Cloud secret must be created beforehand in JSON format (default for AWS SecretsManager) 
+##  
+## Example of SecretStore with AWS ParameterStore provider (should be applied as separate YAML manifest):
+## apiVersion: external-secrets.io/v1beta1
+## kind: SecretStore
+## metadata:
+##   name: anodot
+##   namespace: anodot
+## spec:
+##   provider:
+##   aws:
+##   service: ParameterStore
+##   region: us-east-1
+
+externalSecret:
+  enabled: true
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: SecretStore
+    name: anodot
+  target:
+    name: anodot
+  secrets:
+    ## Secrets are created in cloud provider vault with JSON format: {"aws_access_key_id": "", "aws_secret_access_key": ""}
+    ## Secrets are mapped to env vars AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY
+    AWS_ACCESS_KEY_ID:
+    ## key - secret name created beforehand in cloud provider vault
+      key: env/secret_name_cloud
+    ## property - key to get the value from JSON
+      property: aws_access_key_id
+    AWS_SECRET_ACCESS_KEY:
+      key: env/secret_name_cloud
+      property: aws_secret_access_key
 
 podAnnotations: {}
 
@@ -84,10 +121,10 @@ securityContext: {}
   # runAsUser: 1000
 
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  ## We usually recommend not to specify default resources and to leave this as a conscious
+  ## choice for the user. This also increases chances charts run on environments with little
+  ## resources, such as Minikube. If you do want to specify resources, uncomment the following
+  ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi

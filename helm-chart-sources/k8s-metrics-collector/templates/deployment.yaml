@@ -45,10 +45,15 @@ spec:
             - name: {{ $name }}
               value: {{ $value | quote }}
             {{- end }}
+          {{- if or (eq .Values.environmentVars.type  "secret") (.Values.externalSecret.enabled) }}
           envFrom:
           {{- if eq .Values.environmentVars.type  "secret" }}
             - secretRef:
                 name: {{ include "k8s-metrics-collector.fullname" . }}
+          {{- else if .Values.externalSecret.enabled }}
+            - secretRef:
+                name: {{ .Values.externalSecret.target.name }}         
+          {{- end }}
           {{- end }}
           volumeMounts:
             {{- if .Values.configmap.enabled }}
@@ -71,6 +76,7 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
+
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:

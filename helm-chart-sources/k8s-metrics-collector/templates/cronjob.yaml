@@ -43,10 +43,16 @@ spec:
               env:
                 - name: WORKLOAD
                   value: {{ .Values.workload }}
-              {{- if eq .Values.environmentVars.type  "secret" }}
+              {{- if or (eq .Values.environmentVars.type  "secret") (.Values.externalSecret.enabled) }}
               envFrom:
+              {{- if eq .Values.environmentVars.type  "secret" }}
                 - secretRef:
                     name: {{ include "k8s-metrics-collector.fullname" . }}
+              {{- end}}
+              {{- if .Values.externalSecret.enabled }}
+                - secretRef:
+                    name: {{ .Values.externalSecret.target.name }}
+              {{- end}}
               {{- else }}
                 {{- range $name, $value := .Values.environment }}
                 {{- if not (empty $value) }}
