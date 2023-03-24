@@ -88,7 +88,7 @@ environment:
 ##   region: us-east-1
 
 externalSecret:
-  enabled: true
+  enabled: false
   refreshInterval: 1h
   secretStoreRef:
     kind: SecretStore
