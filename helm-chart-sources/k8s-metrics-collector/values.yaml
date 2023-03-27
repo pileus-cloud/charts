@@ -47,8 +47,6 @@ environment:
 
   # Provided by Anodot:
   # ROLE_ARN: '<role ARN to access Anodot AWS>'
-  AWS_ACCESS_KEY_ID: '<access key for Anodot AWS>'
-  AWS_SECRET_ACCESS_KEY: '<secret access key for Anodot AWS>'
 
   # Prometheus or Thanos URL, might be different for your cluster depending on the service name, namespace and port
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
@@ -69,6 +67,60 @@ environment:
 
   LOG_TO_CLOUD_WATCH: 'true'
 
+environmentSecrets:
+  # Provided by Anodot:
+  AWS_ACCESS_KEY_ID: '<access key for Anodot AWS>'
+  AWS_SECRET_ACCESS_KEY: '<secret access key for Anodot AWS>'
+
+## ExternalSecrets integration https://external-secrets.io/
+## Prerequisites: 
+## 1. Install ExternalSecrets
+## 2. Apply 2 manifests SecretStore and ExternalSecret
+## SecretStore can be integrated with cloud prviders defined in the list https://external-secrets.io/v0.8.1/provider/aws-secrets-manager/
+##
+## apiVersion: external-secrets.io/v1beta1
+## kind: SecretStore
+## metadata:
+##   name: anodot
+##   namespace: anodot
+## spec:
+##   provider:
+##     aws:
+##       service: ParameterStore                  # cloud provider name
+##       # define a specific role to limit access
+##       # to certain secrets.
+##       # role is a optional field that
+##       # can be omitted for test purposes
+##       region: us-east-1
+##
+## apiVersion: external-secrets.io/v1beta1
+## kind: ExternalSecret
+## metadata:
+##   name: anodot
+## spec:
+##   refreshInterval: 1h                          # rate secrets sync interval
+##   secretStoreRef:
+##     kind: SecretStore
+##     name: anodot                               # name of SecretStore
+##   target:
+##     name: anodot-cost-secrets                  # name of k8s Secret to be created
+##     creationPolicy: Owner
+##   data:
+##   - secretKey: AWS_ACCESS_KEY_ID               # name of key in k8s Secret
+##     remoteRef:
+##       key: /dev/anocost/test_client_access_key # secret name in cloud vault
+##       property: AWS_ACCESS_KEY_ID              # which secret value to be fetched based on key in cloud vault, example {"AWS_ACCESS_KEY_ID": "MySecretKeyId"}
+##   - secretKey: AWS_SECRET_ACCESS_KEY
+##     remoteRef:
+##       key: /dev/anocost/test_client_access_key
+##       property: AWS_SECRET_ACCESS_KEY
+
+## environmentExternalSecrets usage overrides AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY defined in environmentSecrets
+environmentExternalSecrets:
+  ## If enabled, environmentExternalSecrets takes precedence over values in environmentSecrets
+  enabled: false
+  ## Provide secret name
+  name: anodot-cost-secrets
 
 podAnnotations: {}
 
