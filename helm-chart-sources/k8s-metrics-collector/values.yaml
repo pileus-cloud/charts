@@ -112,38 +112,6 @@ affinity: {}
 
 prometheusrule:
   enabled: false
-  prometheus:
-    namespace: default
-    labels:
-      release: prometheus
-      app: kube-prometheus-stack
-  groups:
-    - name: k8s-metrics-collector
-      rules:
-        - record: node_memory_UsageTotal_bytes
-          expr: node_memory_MemTotal_bytes - node_memory_MemFree_bytes
 
 configmap:
    enabled: false
-   files:
-   - mountPath: "/usr/src/app/src/agent/data/metric_queries.json"
-     data:
-       metric_queries: |-
-          {
-            "node_instances": "avg_over_time(node_dmi_info[%I%])",
-            "node_properties": "avg_over_time(kube_node_info[%I%])",
-            "node_cpu_limit": "avg_over_time(kube_node_status_capacity{resource='cpu'}[%I%]) * 1000",
-            "node_cpu_request": "sum(avg_over_time(kube_pod_container_resource_requests{resource='cpu'}[%I%])) by (node) * 1000",
-            "node_memory_limit": "avg_over_time(node_memory_MemTotal_bytes[%I%])",
-            "node_memory_request": "sum(avg_over_time(kube_pod_container_resource_requests{resource='memory'}[%I%])) by (node)",
-            "pod_properties": "avg_over_time(kube_pod_info[%I%])",
-            "pod_number_of_containers": "sum(avg_over_time(kube_pod_container_info[%I%])) by (pod,namespace)",
-            "pod_cpu_limit": "sum(avg_over_time(kube_pod_container_resource_limits{resource='cpu'}[%I%])) by (node,pod,namespace) * 1000",
-            "pod_cpu_request": "sum(avg_over_time(kube_pod_container_resource_requests{resource='cpu'}[%I%])) by (node,pod,namespace) * 1000",
-            "pod_cpu_usage_total": "sum(rate(container_cpu_usage_seconds_total[%I%])) by (node,pod,namespace) * 1000",
-            "pod_memory_limit": "sum(avg_over_time(kube_pod_container_resource_limits{resource='memory'}[%I%])) by (node,pod,namespace)",
-            "pod_memory_request": "sum(avg_over_time(kube_pod_container_resource_requests{resource='memory'}[%I%])) by (node,pod,namespace)",
-            "pod_memory_usage": "sum(avg_over_time(container_memory_usage_bytes[%I%])) by (node,pod,namespace)",
-            "pod_network_rx_bytes": "sum(rate(container_network_receive_bytes_total[%I%])) by (node,pod,namespace)",
-            "pod_network_tx_bytes": "sum(rate(container_network_transmit_bytes_total[%I%])) by (node,pod,namespace)",
-          }
