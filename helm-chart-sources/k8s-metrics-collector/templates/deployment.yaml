@@ -47,7 +47,7 @@ spec:
               value: {{ $value | quote }}
             {{- end }}
             {{- end }}
-            {{- if not (eq .Values.environmentVars.type  "secret") }}
+            {{- if and (not .Values.environmentExternalSecrets.enabled) (not (eq .Values.environmentVars.type  "secret")) }}
             {{- range $name, $value := .Values.environmentSecrets }}
             {{- if not (empty $value) }}
             - name: {{ $name }}

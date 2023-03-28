@@ -30,10 +30,6 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-environmentVars:
-  # Type could be 'secret' or 'env'
-  type: env
-
 environment:
   # ========= PLACE YOUR OWN VALUES HERE: =========
 
@@ -67,59 +63,20 @@ environment:
 
   LOG_TO_CLOUD_WATCH: 'true'
 
+environmentVars:
+  # type 'env' - secrets will be added from environmentSecrets to container as environment variables
+  # type 'secret' - secrets will be added from environmentSecrets to Secret object and used in container as environment variables 
+  type: env
+
 environmentSecrets:
   # Provided by Anodot:
   AWS_ACCESS_KEY_ID: '<access key for Anodot AWS>'
   AWS_SECRET_ACCESS_KEY: '<secret access key for Anodot AWS>'
 
-## ExternalSecrets integration https://external-secrets.io/
-## Prerequisites: 
-## 1. Install ExternalSecrets
-## 2. Apply 2 manifests SecretStore and ExternalSecret
-## SecretStore can be integrated with cloud prviders defined in the list https://external-secrets.io/v0.8.1/provider/aws-secrets-manager/
-##
-## apiVersion: external-secrets.io/v1beta1
-## kind: SecretStore
-## metadata:
-##   name: anodot
-##   namespace: anodot
-## spec:
-##   provider:
-##     aws:
-##       service: ParameterStore                  # cloud provider name
-##       # define a specific role to limit access
-##       # to certain secrets.
-##       # role is a optional field that
-##       # can be omitted for test purposes
-##       region: us-east-1
-##
-## apiVersion: external-secrets.io/v1beta1
-## kind: ExternalSecret
-## metadata:
-##   name: anodot
-## spec:
-##   refreshInterval: 1h                          # rate secrets sync interval
-##   secretStoreRef:
-##     kind: SecretStore
-##     name: anodot                               # name of SecretStore
-##   target:
-##     name: anodot-cost-secrets                  # name of k8s Secret to be created
-##     creationPolicy: Owner
-##   data:
-##   - secretKey: AWS_ACCESS_KEY_ID               # name of key in k8s Secret
-##     remoteRef:
-##       key: /dev/anocost/test_client_access_key # secret name in cloud vault
-##       property: AWS_ACCESS_KEY_ID              # which secret value to be fetched based on key in cloud vault, example {"AWS_ACCESS_KEY_ID": "MySecretKeyId"}
-##   - secretKey: AWS_SECRET_ACCESS_KEY
-##     remoteRef:
-##       key: /dev/anocost/test_client_access_key
-##       property: AWS_SECRET_ACCESS_KEY
-
-## environmentExternalSecrets usage overrides AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY defined in environmentSecrets
+## Enabled environmentExternalSecrets takes precedence over settings in environmentVars and values in environmentSecrets
 environmentExternalSecrets:
-  ## If enabled, environmentExternalSecrets takes precedence over values in environmentSecrets
   enabled: false
-  ## Provide secret name
+  ## Provide secret name, it must be the same as defined in kind:ExternalSecret target.name, more details in README.md
   name: anodot-cost-secrets
 
 podAnnotations: {}
@@ -165,11 +122,6 @@ prometheusrule:
       rules:
         - record: node_memory_UsageTotal_bytes
           expr: node_memory_MemTotal_bytes - node_memory_MemFree_bytes
-#          todo
-#    - name: k8s-metrics-collector
-#      rules:
-#        - record: pod_memory_UsageTotal_bytes
-#          expr: sum(container_memory_usage_bytes) by (node,pod)
 
 configmap:
    enabled: false
@@ -194,7 +146,4 @@ configmap:
             "pod_memory_usage": "sum(avg_over_time(container_memory_usage_bytes[%I%])) by (node,pod,namespace)",
             "pod_network_rx_bytes": "sum(rate(container_network_receive_bytes_total[%I%])) by (node,pod,namespace)",
             "pod_network_tx_bytes": "sum(rate(container_network_transmit_bytes_total[%I%])) by (node,pod,namespace)",
-            "pod_labels": "avg_over_time(kube_pod_labels[%I%])",
-            "pod_creation_timestamp": "kube_pod_created",
-            "pod_completion_timestamp": "kube_pod_completion_time"
           }
