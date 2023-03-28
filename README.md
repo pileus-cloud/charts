@@ -6,7 +6,6 @@ Please notice that this agent should be installed **per cluster**. This is done 
   * [Minimum supported versions](#minimum-supported-versions)
   * [Labels collection](#labels-collection)
 - [Installation](#installation)
-  * [Storing secrets](#storing-secrets)
 - [Resources required](#resources-required)
 
 ## Prerequisites
