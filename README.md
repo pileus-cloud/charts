@@ -6,7 +6,6 @@ Please notice that this agent should be installed **per cluster**. This is done 
   * [Minimum supported versions](#minimum-supported-versions)
   * [Labels collection](#labels-collection)
 - [Installation](#installation)
-  * [Storing secrets](#storing-secrets)
 - [Resources required](#resources-required)
 
 ## Prerequisites
@@ -77,9 +76,6 @@ And then
 kubectl get pods -n monitoring | grep k8s-metrics-collector
 kubectl -n monitoring logs -f <k8s-metrics-collector-pod-name>
 ```
-
-### Storing secrets
-It is recommended to use [external secrets](https://github.com/external-secrets/external-secrets), [helm secrets](https://github.com/jkroepke/helm-secrets) or a similar tool to store secrets encrypted and use them in the values file.
 
 ## Resources required
 
