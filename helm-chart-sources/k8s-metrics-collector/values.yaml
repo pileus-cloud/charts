@@ -3,6 +3,10 @@ image:
   pullPolicy: IfNotPresent
   tag: "0.3.5"
 
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
 # workload type: Deployment or CronJob
 workload: CronJob
 
@@ -17,6 +21,15 @@ CronJob:
   restartPolicy: "Never"
   backoffLimit: 0
 
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
 environment:
   # ========= PLACE YOUR OWN VALUES HERE: =========
 
@@ -30,8 +43,6 @@ environment:
 
   # Provided by Anodot:
   # ROLE_ARN: '<role ARN to access Anodot AWS>'
-  AWS_ACCESS_KEY_ID: '<access key for Anodot AWS>'
-  AWS_SECRET_ACCESS_KEY: '<secret access key for Anodot AWS>'
 
   # Prometheus or Thanos URL, might be different for your cluster depending on the service name, namespace and port
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
@@ -52,6 +63,21 @@ environment:
 
   LOG_TO_CLOUD_WATCH: 'true'
 
+environmentVars:
+  # type 'env' - secrets will be added from environmentSecrets to container as environment variables
+  # type 'secret' - secrets will be added from environmentSecrets to Secret object and used in container as environment variables 
+  type: env
+
+environmentSecrets:
+  # Provided by Anodot:
+  AWS_ACCESS_KEY_ID: '<access key for Anodot AWS>'
+  AWS_SECRET_ACCESS_KEY: '<secret access key for Anodot AWS>'
+
+## Enabled environmentExternalSecrets takes precedence over settings in environmentVars and values in environmentSecrets
+environmentExternalSecrets:
+  enabled: false
+  ## Provide secret name, it must be the same as defined in kind:ExternalSecret target.name, more details in README.md
+  name: anodot-cost-secrets
 
 podAnnotations: {}
 

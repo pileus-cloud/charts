@@ -39,18 +39,30 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: WORKLOAD 
+            - name: WORKLOAD
               value: {{ .Values.workload }}
-          {{- if eq .Values.environmentVars.type  "secret" }}
-          envFrom:
-            - secretRef:
-                name: {{ include "k8s-metrics-collector.fullname" . }}
-          {{- else }}
             {{- range $name, $value := .Values.environment }}
             {{- if not (empty $value) }}
             - name: {{ $name }}
               value: {{ $value | quote }}
             {{- end }}
+            {{- end }}
+            {{- if and (not .Values.environmentExternalSecrets.enabled) (not (eq .Values.environmentVars.type  "secret")) }}
+            {{- range $name, $value := .Values.environmentSecrets }}
+            {{- if not (empty $value) }}
+            - name: {{ $name }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
+          {{- if or (eq .Values.environmentVars.type  "secret") (.Values.environmentExternalSecrets.enabled) }}
+          envFrom:
+          {{- if .Values.environmentExternalSecrets.enabled }}
+            - secretRef:
+                name: {{ .Values.environmentExternalSecrets.name }}
+          {{- else if (eq .Values.environmentVars.type  "secret") }}
+            - secretRef:
+                name: {{ include "k8s-metrics-collector.fullname" . }}
           {{- end }}
           {{- end }}
           volumeMounts:
@@ -74,7 +86,6 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
-
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
