@@ -6,6 +6,8 @@ Please notice that this agent should be installed **per cluster**. This is done 
   * [Minimum supported versions](#minimum-supported-versions)
   * [Labels collection](#labels-collection)
 - [Installation](#installation)
+  * [Storing secrets](#storing-secrets)
+    * [External secrets](#external-secrets)
 - [Resources required](#resources-required)
 
 ## Prerequisites
@@ -155,7 +157,7 @@ EOF
 
 5. In chart k8s-metrics-collector set `environmentExternalSecrets.enabled` to true
 
-4. Install/Upgrade Metrics helm chart 
+4. Install/Upgrade k8s-metrics-collector helm chart 
 ```
 helm upgrade --install --create-namespace -n monitoring \
 k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.yaml
