@@ -3,7 +3,7 @@ entries:
   anodot-cost-k8s-cw-agent:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.620570543+02:00"
+    created: "2023-04-05T16:20:31.37238+03:00"
     description: A Helm chart for Kubernetes
     digest: ae66094f429cf96ab816a689c52acce5788d472f42599d695e536b408b276939
     name: anodot-cost-k8s-cw-agent
@@ -13,7 +13,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.620333549+02:00"
+    created: "2023-04-05T16:20:31.3549+03:00"
     description: A Helm chart for Kubernetes
     digest: 365f5ec24a1127858f6ffb693883f7af72b1b7a4b22f409b308578954ec08bef
     name: anodot-cost-k8s-cw-agent
@@ -23,7 +23,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.620095289+02:00"
+    created: "2023-04-05T16:20:31.34451+03:00"
     description: A Helm chart for Kubernetes
     digest: e0d1fec2cb0cb5d2283a3a2babe6ad46b9dbefbb8b21fa3ec4d16e8ac7a0c3a4
     name: anodot-cost-k8s-cw-agent
@@ -33,7 +33,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.619877523+02:00"
+    created: "2023-04-05T16:20:31.340768+03:00"
     description: A Helm chart for Kubernetes
     digest: 878578f99db77f6ad1c3543bad002eac59614238140fa8d2158e9d3a6b92e7e3
     name: anodot-cost-k8s-cw-agent
@@ -43,7 +43,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.619663529+02:00"
+    created: "2023-04-05T16:20:31.340222+03:00"
     description: A Helm chart for Kubernetes
     digest: fb3afd004ce7c18dae4212337e17f37e6546aec01c385f39954c000e5397c387
     name: anodot-cost-k8s-cw-agent
@@ -53,7 +53,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.619414672+02:00"
+    created: "2023-04-05T16:20:31.339326+03:00"
     description: A Helm chart for Kubernetes
     digest: 934ffd88cf275d28fc9ed7fdc431839d06654dfed2435eee350ccb065e7740b2
     name: anodot-cost-k8s-cw-agent
@@ -63,7 +63,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.619198688+02:00"
+    created: "2023-04-05T16:20:31.312467+03:00"
     description: A Helm chart for Kubernetes
     digest: f03608653b29d0385f35a48e590838593d63c28f8b1b757d701846814feac42b
     name: anodot-cost-k8s-cw-agent
@@ -73,7 +73,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.618979252+02:00"
+    created: "2023-04-05T16:20:31.311568+03:00"
     description: A Helm chart for Kubernetes
     digest: f3a4ea132c8d7d41813ef5dd2bcbf242f2d9d1639f7817bf40a0c59ba2b5226b
     name: anodot-cost-k8s-cw-agent
@@ -83,8 +83,18 @@ entries:
     version: 0.1.0
   k8s-metrics-collector:
   - apiVersion: v2
+    appVersion: 0.3.4
+    created: "2023-04-05T16:20:31.390282+03:00"
+    description: A Helm chart for Kubernetes
+    digest: 2b1fea044c8e57faba5f63535969eefdb17dcbc9ce1e6105c9c6381e0e7c5a70
+    name: k8s-metrics-collector
+    type: application
+    urls:
+    - https://pileus-cloud.github.io/charts/k8s-metrics-collector-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 0.2.20
-    created: "2023-01-12T12:54:28.621333161+02:00"
+    created: "2023-04-05T16:20:31.38951+03:00"
     description: A Helm chart for Kubernetes
     digest: eb12b23cbffcd8d3fbd55d8216c71f3ea6181603c0485c4ea263b8dad966be0e
     name: k8s-metrics-collector
@@ -94,7 +104,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-12T12:54:28.620911948+02:00"
+    created: "2023-04-05T16:20:31.384517+03:00"
     description: A Helm chart for Kubernetes
     digest: b24771f9578c0617216dc2f61589ac6fff3f3a09f955b7c50aecd49381c5f914
     name: k8s-metrics-collector
@@ -102,4 +112,4 @@ entries:
     urls:
     - https://pileus-cloud.github.io/charts/k8s-metrics-collector-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-12T12:54:28.618640817+02:00"
+generated: "2023-04-05T16:20:31.302652+03:00"

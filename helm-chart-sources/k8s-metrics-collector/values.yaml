@@ -7,7 +7,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-# workload type: Deployment or CronJob
+# -- workload type: "Deployment", "CronJob"
 workload: CronJob
 
 CronJob:
