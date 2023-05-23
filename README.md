@@ -55,8 +55,8 @@ helm repo add anodot-cost https://pileus-cloud.github.io/charts
 
 ```bash
 helm upgrade --install --create-namespace -n monitoring \
---set environmentSecrets.AWS_ACCESS_KEY_ID="AnodotAwsAccessKeyId" \
---set environmentSecrets.AWS_SECRET_ACCESS_KEY="AnodotAwsSecretKey" \
+--set environmentSecrets.AWS_ACCESS_KEY_ID="<ANODOT-AWS-ACCESS-KEY-ID>" \
+--set environmentSecrets.AWS_SECRET_ACCESS_KEY="<ANODOT-AWS-SECRET-KEY>" \
 k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.yaml
 ```
 

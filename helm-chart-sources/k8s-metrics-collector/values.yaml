@@ -39,7 +39,7 @@ environment:
   ACCOUNT_ID: '<ID of your AWS root account>'
   LINKED_ACCOUNT_ID: '<ID of your AWS linked account which owns the cluster>'
 
-  CLOUD_PROVIDER: 'aws'
+  CLOUD_PROVIDER: '<aws or azure>'
 
   # Provided by Anodot:
   # ROLE_ARN: '<role ARN to access Anodot AWS>'
