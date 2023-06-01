@@ -1,13 +1,13 @@
 config:
-  clusterName: "test-cluster"
+  clusterName: "eks-dev"
   clusterRegion: "us-east-1"
   tagService: false
   collectionInterval: 120
-  
+
 image:
-  repository: public.ecr.aws/q4e2d9n7/cloudwatch-agent
+  repository: amazon/cloudwatch-agent
   pullPolicy: IfNotPresent
-  tag: "1.247354.0-1-g563aa72-dev"
+  tag: "1.247359.1b252618"
 
 resources:
   limits:

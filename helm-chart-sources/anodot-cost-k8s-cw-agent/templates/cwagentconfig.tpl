@@ -10,7 +10,8 @@ data:
           "kubernetes": {
             "cluster_name": "{{ .Values.config.clusterName }}",
             "metrics_collection_interval": {{ .Values.config.collectionInterval }},
-            "tag_service": {{ .Values.config.tagService }}
+            "tag_service": {{ .Values.config.tagService }},
+            "disable_metric_extraction": true
           }
         },
         "force_flush_interval": 5
