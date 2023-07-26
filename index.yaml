@@ -93,16 +93,6 @@ entries:
     version: 0.1.0
   k8s-metrics-collector:
   - apiVersion: v2
-    appVersion: 0.3.4
-    created: "2023-07-26T15:06:31.845148015+03:00"
-    description: A Helm chart for Kubernetes
-    digest: 4a80c93c4a02ccd752eeecbe4b6ef6106350725de2587ea6e16e81924dad8033
-    name: k8s-metrics-collector
-    type: application
-    urls:
-    - https://pileus-cloud.github.io/charts/k8s-metrics-collector-0.1.4.tgz
-    version: 0.1.4
-  - apiVersion: v2
     appVersion: 0.3.6
     created: "2023-07-26T15:07:21.019943593+03:00"
     description: A Helm chart for Kubernetes
