@@ -1,4 +1,15 @@
-# Kubernetes Metrics Collector Installation Guide
+# Prometheus-Agent for Anodot-Costs
+
+## Introduction
+
+This Helm chart is for the installation of Anodot's Prometheus-Agent for Kubernetes.
+
+This agent is deployed as ChronJob and collects metrics of the cluster from Prometheus, and sends them to Anodot, where
+it is then being analyzed for usage and cloud costs allocation to the cluster's components. 
+
+
+## Table of contents
+
 
 Please notice that this agent should be installed **per cluster**. This is done in order to reduce the load. We are assuming that each cluster has a separate Prometheus or Thanos instance. 
 
