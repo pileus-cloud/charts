@@ -97,6 +97,16 @@ environmentExternalSecrets:
   ## Provide secret name, it must be the same as defined in kind:ExternalSecret target.name, more details in README.md
   name: anodot-cost-secrets
 
+resources: {}
+  # The following settings were tested on ~100000 metrics. The agent might require a larger amount of resources in case
+  # of having to process a larger amount of data.
+  #  Limits:
+  #    cpu:     100m
+  #    memory:  500Mi
+  #  Requests:
+  #    cpu:     100m
+  #    memory:  500Mi
+
 podAnnotations: {}
 
 podSecurityContext: {}
@@ -109,18 +119,6 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
 
 nodeSelector: {}
 
