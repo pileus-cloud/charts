@@ -22,8 +22,7 @@ environment:
   # Cloud provider. Valid options: 'aws' for AWS, 'azure' for Azure.
   CLOUD_PROVIDER: '<INSERT CLOUD PROVIDER HERE>'
 
-  # Base URL to Prometheus query server that contains the query API endpoint (which might be available also for other
-  # services supporting PromQL, e.g. Thanos, Grafana)
+  # Base URL to Prometheus or PromQL-compatible server (e.g. Thanos/Grafana), that has the query API endpoint.
   # This is the default path for Prometheus installation. Override this to match your environment.
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
 
