@@ -1,7 +1,7 @@
 image:
   repository: public.ecr.aws/i5o6o6d7/k8s-metrics-agent
   pullPolicy: IfNotPresent
-  tag: "0.3.6"
+  tag: "0.3.7"
 
 # -----------------------------------------------------------------------------
 # The following parameters should be configured according to your environment.
@@ -22,10 +22,22 @@ environment:
   # Cloud provider. Valid options: 'aws' for AWS, 'azure' for Azure.
   CLOUD_PROVIDER: '<INSERT CLOUD PROVIDER HERE>'
 
-  # Base URL to Prometheus server that contains the query API endpoint (which might be available also for other services
-  # supporting PromQL, e.g. Thanos, Grafana)
+  # Base URL to Prometheus query server that contains the query API endpoint (which might be available also for other
+  # services supporting PromQL, e.g. Thanos, Grafana)
   # This is the default path for Prometheus installation. Override this to match your environment.
   PROMETHEUS_URL: 'http://prometheus-kube-prometheus-prometheus:9090'
+
+  # The following settings are relevant only in some cases. Set them when it applies to your case according to the
+  # description. Do not set them when they are not required.
+
+  # In case authentication is required to connect to the Prometheus query server, uncomment and set these user and password.
+  #  USERNAME: ''
+  #  PASSWORD: ''
+
+  # In case special HTTP request headers are required by the Prometheus server, insert them in a JSON format as string.
+  # A known case is a multi-tenant mode in some Grafana configurations that require the `X-Scope-OrgID` header (see the
+  # example).
+  #  REQUEST_HEADERS: '{"X-Scope-OrgID": "YOUR-TENANT-NAME"}'
 
   # A general condition that matches metrics relevant to this cluster.
   # This is required only in environments where metrics are stored from multiple clusters, so this conditions filters
