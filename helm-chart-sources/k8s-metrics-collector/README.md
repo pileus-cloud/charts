@@ -85,9 +85,11 @@ $ helm upgrade <PROMETHEUS RELEASE> <OTHER OPTIONAL ARGS> --set kube-state-metri
    ```bash
    $ helm repo update anodot-cost
    ```
-2. Set the required parameters in the [values.yaml](values.yaml) file. Make sure to replace all the relevant values according to the comments for each value, including the Anodot access key.
+
+2. Set the required parameters in the [values.yaml](values.yaml) file and save a copy locally (preferably containing just the modified values). Make sure to replace all the relevant values according to the comments for each value, including the Anodot access key.
    * Alternatively, you can set any value as a set argument in the `helm upgrade` command. You can also use a method for [storing secrets safely](storing-secrets.md) such as [external-secrets](https://external-secrets.io/).
-3. Install the k8s-metrics-collector chart:
+
+3. Install the k8s-metrics-collector chart, where `values.yaml` is the modified file (specify a path if needed):
    ```bash
    $ helm upgrade --install --create-namespace -n <NAMESPACE> k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.yaml
    ```
