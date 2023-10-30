@@ -41,6 +41,8 @@ spec:
           env:
             - name: WORKLOAD
               value: {{ .Values.workload }}
+            - name: APP_VERSION
+              value:  {{ .Values.image.tag | default .Chart.AppVersion }}
             {{- range $name, $value := .Values.environment }}
             {{- if not (empty $value) }}
             - name: {{ $name }}
