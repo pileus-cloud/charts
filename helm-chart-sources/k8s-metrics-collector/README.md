@@ -15,6 +15,7 @@ it is then being analyzed for usage and cloud costs allocation to the cluster's 
    2. [Required metrics](#required-metrics)
       1. [Labels collection](#labels-collection)
 2. [Installation](#installation)
+3. [Validation & Troubleshooting](#validation--troubleshooting)
 
 ## Prerequisites
 
@@ -75,6 +76,7 @@ might be overridden by future upgrades):
 $ helm upgrade <PROMETHEUS RELEASE> <OTHER OPTIONAL ARGS> --set kube-state-metrics.extraArgs[0]=--metric-labels-allowlist=pods=[*],nodes=[*]
 ```
 
+
 ## Installation
 
 1. Add anodot-cost Helm repository:
@@ -95,14 +97,42 @@ $ helm upgrade <PROMETHEUS RELEASE> <OTHER OPTIONAL ARGS> --set kube-state-metri
    ```
    Where `<NAMESPACE>` is to be replaced with the namespace for the agent.
 
-The default configuration for the agent is a CronJob which is scheduled to run hourly each X:00:00, therefore it might take up to an hour until the agent actually runs.
-To verify the agent's installation, you can create a job manually:
+
+## Validation & Troubleshooting
+The default configuration for the agent is a CronJob which is scheduled to run hourly every X:00:00, therefore it might take up to an hour until the agent actually runs.
+
+To avoid the wait for the next hour to start, you can create a job manually:
 ```bash
 $ kubectl -n <NAMESPACE> create job --from=cronjob/k8s-metrics-collector k8s-metrics-collector-manual-run
 ```
-Then verify that it runs successfully and check its logs:
+Verify that an agent pod ran successfully and check its logs:
 ```bash
+# Identify the name of the agent pod:
 $ kubectl get pods -n <NAMESPACE> | grep k8s-metrics-collector
-# get the pod name and replace with <POD-NAME>
+# Retrieve the agent logs (replace <POD-NAME>):
 $ kubectl logs -n <NAMESPACE> <POD-NAME>
 ```
+A typical log of an agent run sequence looks like this:
+```
+<timestamp> - INFO - Agent configuration: { ..... }
+<timestamp> - INFO - ---- STARTING ITERATION ----
+...
+<timestamp> - INFO - <metric name #1> took <seconds>
+<timestamp> - INFO - <metric name #2> took <seconds>
+<timestamp> - INFO - <metric name #3> took <seconds>
+...
+```
+This structure, where only INFO lines are shown, is usually an indication that the agent works as expected.
+
+If you see a fatal error, it usually indicates a problem in the configuration. The error message may indicate the source of the issue. Some of the known cases include:
+* Wrong Prometheus server URL (PROMETHEUS_URL)
+* Missing required authentication parameters such as user and password (USERNAME & PASSWORD) or request headers (REQUEST_HEADERS)
+* Malformed/invalid values in some parameters (e.g. CLOUD_PROVIDER, METRIC_CONDITION, REQUEST_HEADERS). Follow the example or the documentation of those parameters if used.
+
+If you see warning lines of the following format reoccurring in every run, it's likely to indicate an issue:
+```
+<timestamp> - WARNING - Prometheus query returned no data: {'query': "avg_over_time(<metric name>{ ...
+```
+The cause of these issues is usually one of the following:
+* The metric is not collected in your environment, or not exposed by the Prometheus server. In this case you'll need to adjust your environment so that these metrics are properly accessible.
+* The job responsible for collecting and generating the specified metric is not named as the default (as listed [here](#required-metrics)). In this case, the agent [configuration](values.yaml) has to specify the correct names (for parameters KUBE_STATE_METRICS_JOB_NAME/KUBELET_JOB_NAME).
