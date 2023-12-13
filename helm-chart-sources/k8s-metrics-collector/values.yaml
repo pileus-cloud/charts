@@ -38,6 +38,12 @@ environment:
   # example).
   #  REQUEST_HEADERS: '{"X-Scope-OrgID": "YOUR-TENANT-NAME"}'
 
+  # The following can be used to override the default timeout for the request sent to the Prometheus server. Values are
+  # in units of seconds. VALIDATION_REQUEST_TIMEOUT is used only in the initial stage of configuration validation to
+  # test access to the server.
+  #  VALIDATION_REQUEST_TIMEOUT = 5
+  #  REQUEST_TIMEOUT = 300
+
   # A general condition that matches metrics relevant to this cluster.
   # This is required only in environments where metrics are stored from multiple clusters, so this conditions filters
   # out all the rest.
