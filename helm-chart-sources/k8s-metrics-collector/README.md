@@ -136,3 +136,11 @@ If you see warning lines of the following format reoccurring in every run, it's 
 The cause of these issues is usually one of the following:
 * The metric is not collected in your environment, or not exposed by the Prometheus server. In this case you'll need to adjust your environment so that these metrics are properly accessible.
 * The job responsible for collecting and generating the specified metric is not named as the default (as listed [here](#required-metrics)). In this case, the agent [configuration](values.yaml) has to specify the correct names (for parameters KUBE_STATE_METRICS_JOB_NAME/KUBELET_JOB_NAME).
+
+### Exit codes
+The agent, as a CronJob, may exit with one of the following error codes:
+
+* `0 [OK]`: Operation ended successfully.
+  * Note: it doesn't guarantee that no problems were encountered during the operation (e.g. no data was retrieved for a query).
+* `1 [Configuration error]`: Failure while setting and validating the configuration. This error usually indicates misconfigured settings in the values.yaml file.   
+* `2 [Runtime error]`: Other unexpected fatal errors, typically during the main part of the execution.  
