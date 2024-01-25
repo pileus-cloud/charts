@@ -3,9 +3,9 @@ entries:
   anodot-cost-k8s-cw-agent:
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2023-12-13T14:36:36.762555883Z"
+    created: "2024-01-25T17:12:00.412039111Z"
     description: A Helm chart for Kubernetes
-    digest: 90d0fff4e0c230bba31e0e58939e8df4235768776e2e85f448e4b4c775c1645a
+    digest: d41657bc1ebb0a233dd77db0d678df08eee4ad97f1104b86eccadee6bdb14a9b
     name: anodot-cost-k8s-cw-agent
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.762115295Z"
+    created: "2024-01-25T17:12:00.411731677Z"
     description: A Helm chart for Kubernetes
     digest: ae66094f429cf96ab816a689c52acce5788d472f42599d695e536b408b276939
     name: anodot-cost-k8s-cw-agent
@@ -23,7 +23,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.761683463Z"
+    created: "2024-01-25T17:12:00.411430852Z"
     description: A Helm chart for Kubernetes
     digest: 365f5ec24a1127858f6ffb693883f7af72b1b7a4b22f409b308578954ec08bef
     name: anodot-cost-k8s-cw-agent
@@ -33,7 +33,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.761242665Z"
+    created: "2024-01-25T17:12:00.411141707Z"
     description: A Helm chart for Kubernetes
     digest: e0d1fec2cb0cb5d2283a3a2babe6ad46b9dbefbb8b21fa3ec4d16e8ac7a0c3a4
     name: anodot-cost-k8s-cw-agent
@@ -43,7 +43,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.760848149Z"
+    created: "2024-01-25T17:12:00.41083229Z"
     description: A Helm chart for Kubernetes
     digest: 878578f99db77f6ad1c3543bad002eac59614238140fa8d2158e9d3a6b92e7e3
     name: anodot-cost-k8s-cw-agent
@@ -53,7 +53,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.760579106Z"
+    created: "2024-01-25T17:12:00.410523892Z"
     description: A Helm chart for Kubernetes
     digest: fb3afd004ce7c18dae4212337e17f37e6546aec01c385f39954c000e5397c387
     name: anodot-cost-k8s-cw-agent
@@ -63,7 +63,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.760361638Z"
+    created: "2024-01-25T17:12:00.410215861Z"
     description: A Helm chart for Kubernetes
     digest: 934ffd88cf275d28fc9ed7fdc431839d06654dfed2435eee350ccb065e7740b2
     name: anodot-cost-k8s-cw-agent
@@ -73,7 +73,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.760128518Z"
+    created: "2024-01-25T17:12:00.409886051Z"
     description: A Helm chart for Kubernetes
     digest: f03608653b29d0385f35a48e590838593d63c28f8b1b757d701846814feac42b
     name: anodot-cost-k8s-cw-agent
@@ -83,7 +83,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.759900425Z"
+    created: "2024-01-25T17:12:00.409575202Z"
     description: A Helm chart for Kubernetes
     digest: f3a4ea132c8d7d41813ef5dd2bcbf242f2d9d1639f7817bf40a0c59ba2b5226b
     name: anodot-cost-k8s-cw-agent
@@ -93,8 +93,18 @@ entries:
     version: 0.1.0
   k8s-metrics-collector:
   - apiVersion: v2
+    appVersion: 0.3.11
+    created: "2024-01-25T17:12:00.417998929Z"
+    description: A Helm chart for Kubernetes
+    digest: 993c48a5fcd19bea3cc250d635e9181f2d7123cfd24b2b3b9191976bd3c96444
+    name: k8s-metrics-collector
+    type: application
+    urls:
+    - https://pileus-cloud.github.io/charts/k8s-metrics-collector-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
     appVersion: 0.3.10
-    created: "2023-12-13T14:36:36.778132743Z"
+    created: "2024-01-25T17:12:00.417371322Z"
     description: A Helm chart for Kubernetes
     digest: 9bf3384598a9d503c60e665a5d64af737fde42c431d6c18b272ec2ff4931821d
     name: k8s-metrics-collector
@@ -104,7 +114,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.3.9
-    created: "2023-12-13T14:36:36.777083427Z"
+    created: "2024-01-25T17:12:00.416749022Z"
     description: A Helm chart for Kubernetes
     digest: cbfa526a24561f689b56080db2c43145aebaadbe6643ca6448df54a603c0ee1e
     name: k8s-metrics-collector
@@ -114,7 +124,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.3.8
-    created: "2023-12-13T14:36:36.776048901Z"
+    created: "2024-01-25T17:12:00.416153384Z"
     description: A Helm chart for Kubernetes
     digest: 868277dbac4b8d64dfa58ef985f5a161d89a08bec94d26bc7880ec0e7ac2cd52
     name: k8s-metrics-collector
@@ -124,7 +134,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.3.8
-    created: "2023-12-13T14:36:36.77501376Z"
+    created: "2024-01-25T17:12:00.415532457Z"
     description: A Helm chart for Kubernetes
     digest: 645a66a770e22150634a9f506cce0db4cf04d8f44501c77357c1312f13b9bd42
     name: k8s-metrics-collector
@@ -134,7 +144,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.3.7
-    created: "2023-12-13T14:36:36.765565609Z"
+    created: "2024-01-25T17:12:00.414877757Z"
     description: A Helm chart for Kubernetes
     digest: 4134415097a65795847bf47700871317bea2bf7c8ef8aef0599abe8fba927c24
     name: k8s-metrics-collector
@@ -144,7 +154,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.3.4
-    created: "2023-12-13T14:36:36.764608367Z"
+    created: "2024-01-25T17:12:00.41375405Z"
     description: A Helm chart for Kubernetes
     digest: 2b1fea044c8e57faba5f63535969eefdb17dcbc9ce1e6105c9c6381e0e7c5a70
     name: k8s-metrics-collector
@@ -154,7 +164,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.2.20
-    created: "2023-12-13T14:36:36.763931689Z"
+    created: "2024-01-25T17:12:00.413000004Z"
     description: A Helm chart for Kubernetes
     digest: eb12b23cbffcd8d3fbd55d8216c71f3ea6181603c0485c4ea263b8dad966be0e
     name: k8s-metrics-collector
@@ -164,7 +174,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-12-13T14:36:36.763212013Z"
+    created: "2024-01-25T17:12:00.412467956Z"
     description: A Helm chart for Kubernetes
     digest: b24771f9578c0617216dc2f61589ac6fff3f3a09f955b7c50aecd49381c5f914
     name: k8s-metrics-collector
@@ -172,4 +182,4 @@ entries:
     urls:
     - https://pileus-cloud.github.io/charts/k8s-metrics-collector-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-13T14:36:36.759530185Z"
+generated: "2024-01-25T17:12:00.409067071Z"
