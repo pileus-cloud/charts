@@ -58,11 +58,6 @@ environment:
   # When workload of type Deployment is set (non-default), uncomment this (and leave the value as it is).
   # CRON_SCHEDULE: : "1 * * * *"
 
-  # The following values are for internal use and should not be modified.
-  S3_BUCKET: 'prod-prometheus-agent'
-  MONITORING: 'none'
-  LOG_TO_CLOUD_WATCH: 'true'
-  
 
 environmentSecrets:
   # Access key required for uploading collected metrics to Anodot (should be provided to you by Anodot)
