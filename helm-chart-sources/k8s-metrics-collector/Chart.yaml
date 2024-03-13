@@ -3,4 +3,4 @@ appVersion: 0.3.13
 description: A Helm chart for Kubernetes
 name: k8s-metrics-collector
 type: application
-version: 0.1.11
+version: 0.1.12
