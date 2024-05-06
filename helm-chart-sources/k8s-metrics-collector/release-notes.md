@@ -1,5 +1,8 @@
 ## Application Public Release Notes
 
+### 0.3.14
+- Request headers are confidential
+
 ### 0.3.13
 - Optional job filters (were mandatory)
 
