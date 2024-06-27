@@ -1,5 +1,8 @@
 ## Application Public Release Notes
 
+### 0.3.15
+- Chart securityContext support for running as a non-root user 
+
 ### 0.3.14
 - Request headers are confidential
 
