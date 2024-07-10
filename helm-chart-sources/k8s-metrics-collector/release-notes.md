@@ -1,7 +1,13 @@
 ## Application Public Release Notes
 
+### 0.3.17
+- Chart securityContext support for running as a non-root user (for CronJob workload)
+
+### 0.3.16
+- Improved configuration error validations
+
 ### 0.3.15
-- Chart securityContext support for running as a non-root user 
+- Chart securityContext support for running as a non-root user (for Deployment workload)
 
 ### 0.3.14
 - Request headers are confidential
