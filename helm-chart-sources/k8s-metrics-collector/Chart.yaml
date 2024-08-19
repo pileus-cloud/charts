@@ -4,3 +4,8 @@ description: A Helm chart for Kubernetes
 name: k8s-metrics-collector
 type: application
 version: 0.1.16
+dependencies:
+- condition: kubePrometheusStack.enabled
+  name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 61.9.*
