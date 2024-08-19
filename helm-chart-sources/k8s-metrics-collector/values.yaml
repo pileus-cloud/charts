@@ -195,4 +195,4 @@ prometheusrule:
   enabled: false
 
 configmap:
-   enabled: false
+  enabled: false
