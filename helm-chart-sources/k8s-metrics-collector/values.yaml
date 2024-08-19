@@ -5,7 +5,7 @@ image:
 
 # Enable prometheus deployment
 kubePrometheusStack:
-  enabled: true
+  enabled: false
 
 kube-prometheus-stack:
   fullnameOverride: 'k8s-metrics-collector'
