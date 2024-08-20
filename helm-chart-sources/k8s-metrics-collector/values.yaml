@@ -98,7 +98,7 @@ workload: CronJob
 kube-prometheus-stack:
   fullnameOverride: 'k8s-metrics-collector'
   crds:
-    enabled: false
+    enabled: true
   defaultRules:
     create: false
   alertmanager:
