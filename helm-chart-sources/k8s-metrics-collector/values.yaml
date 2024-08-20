@@ -74,6 +74,9 @@ environmentSecrets:
   AWS_ACCESS_KEY_ID: '<INSERT ANODOT ACCESS KEY>'
   AWS_SECRET_ACCESS_KEY: '<INSERT ANODOT SECRET ACCESS KEY>'
 
+kubePrometheusStack:
+  # Enable prometheus deployment
+  enabled: false
 
 # -----------------------------------------------------------------------------
 # Modifying the following parameters is generally not required, and not
@@ -88,6 +91,45 @@ environmentVars:
 # Supported workload type: Deployment, CronJob.
 # CronJob is the default way. Deployment is a persistent pod that schedules its work internally, and requires uncommenting environment.CRON_SCHEDULE.
 workload: CronJob
+
+# Prometheus stack parameters (if kubePrometheusStack.enabled = true)
+kube-prometheus-stack:
+  fullnameOverride: 'k8s-metrics-collector'
+  crds:
+    enabled: false
+  defaultRules:
+    create: false
+  alertmanager:
+    enabled: false
+  grafana:
+    enabled: false
+  kubeApiServer:
+    enabled: true
+  kubelet:
+    enabled: true
+  kubeControllerManager:
+    enabled: true
+  coreDns:
+    enabled: true
+  kubeDns:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  kubeProxy:
+    enabled: true
+  kubeStateMetrics:
+    enabled: true
+  kube-state-metrics:
+    extraArgs:
+    - --metric-labels-allowlist=pods=[*],nodes=[*]
+  nodeExporter:
+    enabled: false
+  prometheusOperator:
+    enabled: false
+  prometheus:
+    enabled: true
 
 imagePullSecrets: []
 nameOverride: ""
@@ -152,4 +194,4 @@ prometheusrule:
   enabled: false
 
 configmap:
-   enabled: false
+  enabled: false

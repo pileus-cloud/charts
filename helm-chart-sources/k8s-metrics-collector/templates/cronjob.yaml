@@ -45,9 +45,18 @@ spec:
                   value: {{ .Values.workload }}
                 - name: APP_VERSION
                   value:  {{ .Values.image.tag | default .Chart.AppVersion }}
+                {{- if .Values.kubePrometheusStack.enabled }}
+                - name: PROMETHEUS_URL
+                  value: http://{{ index .Values "kube-prometheus-stack" "fullnameOverride" }}-prometheus:9090
+                {{- end }}
                 {{- range $name, $value := .Values.environment }}
+                {{- if and ($.Values.kubePrometheusStack.enabled) ( not (eq $name "PROMETHEUS_URL" )) }}
                 - name: {{ $name }}
                   value: {{ $value | quote }}
+                {{- else if not ($.Values.kubePrometheusStack.enabled) }}
+                - name: {{ $name }}
+                  value: {{ $value | quote }}
+                {{- end }}
                 {{- end }}
                 {{- if and (not .Values.environmentExternalSecrets.enabled) (not (eq .Values.environmentVars.type  "secret")) }}
                 {{- range $name, $value := .Values.environmentSecrets }}
