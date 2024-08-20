@@ -129,7 +129,7 @@ kube-prometheus-stack:
   nodeExporter:
     enabled: false
   prometheusOperator:
-    enabled: false
+    enabled: true
   prometheus:
     enabled: true
 
