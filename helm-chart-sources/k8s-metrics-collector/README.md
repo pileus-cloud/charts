@@ -23,22 +23,16 @@ The agent has to be installed **per cluster**.  In case metrics from multiple cl
 
 The followings are required before installing Prometheus-Agent for Anodot-Cost:
 - `Helm 3`
-- `prometheus` or a similar service with accessible Prometheus-query API endpoint
-- All the [specified metrics](#required-metrics) are available
 - Anodot Access Key for uploading collected metrics (should be provided to you by Anodot)
-
-### Known supported Prometheus versions
-
-- `prometheus` 2.24 and above
-- `kube-state-metrics` 1.9.7 and above
-
-Both of these components are included in Community `kube-prometheus-stack` chart - 13.11.0
+- Prometheus or a compatible service with accessible Prometheus-query API endpoint
+  - The agent can either integrate with your existing Prometheus server, or be installed with a compatible lightweight Prometheus stack provided by this chart.
+  - All the [specified metrics](#required-metrics) are available
 
 ### Required metrics
 
 The following is a list of mandatory metrics that are collected by the agent.
 
-All of them should be available by default when installing `kube-prometheus-stack`, except node labels (see [labels collection](#labels-collection)).
+All of them should be available by default when installing `kube-prometheus-stack`, except node labels (see [labels collection](#labels-collection)). Node labels are already enabled by the stack that is optionally provided by this chart.
 
 
 | Metric                                 | Responsible job    |
@@ -61,7 +55,8 @@ All of them should be available by default when installing `kube-prometheus-stac
 
 
 #### Labels collection
-Node labels are required, and their collection is not enabled by default when installing Prometheus.
+Node labels are required, and their collection is not enabled by default when generally installing Prometheus (this is not the case with the built-in Prometheus installation that is optionally included here, which does include node labels collection).
+
 Enabling it requires adding the extra argument `--metric-labels-allowlist=pods=[*],nodes=[*]` to `kube-state-metrics`.
 
 If you are using a Helm chart, this line can be added to the `values.yaml` file in this hierarchy,
@@ -79,6 +74,8 @@ $ helm upgrade <PROMETHEUS RELEASE> <OTHER OPTIONAL ARGS> --set kube-state-metri
 
 ## Installation
 
+The agent can be installed as a standalone release that integrates with your existing Prometheus server (the default), or as a release that also includes a compatible lightweight Prometheus stack.
+
 1. Add anodot-cost Helm repository:
    ```bash
    $ helm repo add anodot-cost https://pileus-cloud.github.io/charts
@@ -90,12 +87,19 @@ $ helm upgrade <PROMETHEUS RELEASE> <OTHER OPTIONAL ARGS> --set kube-state-metri
 
 2. Set the required parameters in the [values.yaml](values.yaml) file and save a copy locally (preferably containing just the modified values). Make sure to replace all the relevant values according to the comments for each value, including the Anodot access key.
    * Alternatively, you can set any value as a set argument in the `helm upgrade` command. You can also use a method for [storing secrets safely](storing-secrets.md) such as [external-secrets](https://external-secrets.io/).
-
+    
 3. Install the k8s-metrics-collector chart, where `values.yaml` is the modified file (specify a path if needed):
    ```bash
    $ helm upgrade --install --create-namespace -n <NAMESPACE> k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.yaml
    ```
    Where `<NAMESPACE>` is to be replaced with the namespace for the agent.
+   
+   * **To include the built-in Prometheus stack**, set the value `kubePrometheusStack.enabled=true` either in the `values.yaml` file, or add it to the helm command:
+       ```bash
+       $ helm upgrade --install --create-namespace -n <NAMESPACE> k8s-metrics-collector anodot-cost/k8s-metrics-collector -f values.yaml --set kubePrometheusStack.enabled=true
+       ```
+       Note the `kube-prometheus-stack` section in the `values.yaml` file, which can be used to configure the Prometheus stack (the current configuration provides minimal functionality compatible with the agent's requirements). 
+
 
 
 ## Validation & Troubleshooting
