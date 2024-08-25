@@ -1,5 +1,8 @@
 ## Application Public Release Notes
 
+### 0.3.18
+- Improved configuration validation and error logging
+
 ### 0.3.17
 - Chart securityContext support for running as a non-root user (for CronJob workload)
 
