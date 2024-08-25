@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 0.3.17-gcp
+appVersion: 0.3.18
 description: A Helm chart for Kubernetes
 name: k8s-metrics-collector
 type: application
-version: 0.1.18
+version: 0.1.19
 dependencies:
 - condition: kubePrometheusStack.enabled
   name: kube-prometheus-stack
