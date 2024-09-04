@@ -1,5 +1,8 @@
 ## Application Public Release Notes
 
+### 0.3.19
+- Protection against AWS environment variables override
+
 ### 0.3.18
 - Improved configuration validation and error logging
 
