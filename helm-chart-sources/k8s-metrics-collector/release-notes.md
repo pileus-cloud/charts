@@ -1,5 +1,8 @@
 ## Application Public Release Notes
 
+### 0.3.20
+- Filtering out empty-image results from Prometheus usage queries
+
 ### 0.3.19
 - Protection against AWS environment variables override
 
