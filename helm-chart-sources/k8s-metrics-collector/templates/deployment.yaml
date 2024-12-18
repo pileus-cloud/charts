@@ -95,6 +95,8 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
+            - mountPath: /usr/src/app/src/agent/data
+              name: appdata
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
@@ -105,6 +107,8 @@ spec:
             name: {{ include "k8s-metrics-collector.fullname" . }}
       {{- end }}
       {{- end }}
+        - emptyDir: {}
+          name: appdata
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
