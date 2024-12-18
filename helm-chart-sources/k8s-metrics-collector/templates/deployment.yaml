@@ -43,6 +43,8 @@ spec:
               value: {{ .Values.workload }}
             - name: APP_VERSION
               value:  {{ .Values.image.tag | default .Chart.AppVersion }}
+            - name: APP_DATA_DIR
+              value: /tmp/data
             {{- if .Values.kubePrometheusStack.enabled }}
             - name: PROMETHEUS_URL
               value: http://{{ index .Values "kube-prometheus-stack" "fullnameOverride" }}-prometheus:9090
@@ -95,12 +97,13 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
-            - mountPath: /usr/src/app/src/agent/data
+            - mountPath: /tmp
               name: appdata
-              subPath: data
+              subPath: tmp
             - mountPath: /var/log
               name: appdata
               subPath: log
+          command: ["/bin/sh", "-c", "cp -r /usr/src/app/src/agent/data /tmp && /usr/src/app/entry.sh"]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
