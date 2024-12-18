@@ -97,6 +97,10 @@ spec:
             {{- end }}
             - mountPath: /usr/src/app/src/agent/data
               name: appdata
+              subPath: data
+            - mountPath: /var/log
+              name: appdata
+              subPath: log
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
