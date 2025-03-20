@@ -9,6 +9,7 @@ metadata:
       {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
+  suspend: {{ .Values.CronJob.suspend }}
   schedule: "{{ .Values.CronJob.schedule }}"
   concurrencyPolicy: {{ .Values.CronJob.concurrencyPolicy }}
   startingDeadlineSeconds: {{ .Values.CronJob.startingDeadlineSeconds }}
@@ -30,6 +31,7 @@ spec:
           {{- toYaml . | nindent 12 }}
           {{- end }}
           activeDeadlineSeconds: {{ .Values.CronJob.activeDeadlineSeconds }}
+          ttlSecondsAfterFinished: {{ .Values.CronJob.ttlSecondsAfterFinished }}
           restartPolicy: {{ .Values.CronJob.restartPolicy }}
           serviceAccountName: {{ include "k8s-metrics-collector.serviceAccountName" . }}
           securityContext:
