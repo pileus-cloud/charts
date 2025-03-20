@@ -138,7 +138,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 CronJob:
+  suspend: false
   schedule: "1 * * * *"
+  ttlSecondsAfterFinished: 86400
   concurrencyPolicy: Forbid
   startingDeadlineSeconds: 15
   failedJobsHistoryLimit: 3
