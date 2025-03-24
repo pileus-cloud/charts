@@ -1,5 +1,8 @@
 ## Application Public Release Notes
 
+### 0.3.21
+- Added job-owners query for retrieving CronJob as original pod owners
+
 ### 0.3.20
 - Filtering out empty-image results from Prometheus usage queries
 
