@@ -199,3 +199,22 @@ prometheusrule:
 
 configmap:
   enabled: false
+
+
+sidecars: []
+  # # Replace ${awsRegion} with your region.
+  # - name: aws-sigv4-proxy
+  #   image: public.ecr.aws/aws-observability/aws-sigv4-proxy:1.0
+  #   args:
+  #     - --name
+  #     - aps
+  #     - --region
+  #     - ${awsRegion}
+  #     - --host
+  #     - aps-workspaces.${awsRegion}.amazonaws.com
+  #   env:
+  #     - name: AWS_REGION
+  #       value: ${awsRegion}
+  #   ports:
+  #     - name: aws-sigv4-proxy
+  #       containerPort: 8080
