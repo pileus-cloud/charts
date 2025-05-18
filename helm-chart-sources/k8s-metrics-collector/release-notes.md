@@ -1,5 +1,9 @@
 ## Application Public Release Notes
 
+### 0.3.22
+- Optional persistent volumes related queries
+- Mitigation of failure due to CreateLogStream throttling
+
 ### 0.3.21
 - Added job-owners query for retrieving CronJob as original pod owners
 
