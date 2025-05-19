@@ -78,7 +78,7 @@ environmentSecrets:
 
 kubePrometheusStack:
   # Enable prometheus deployment
-  enabled: false
+  enabled: true
 
 # -----------------------------------------------------------------------------
 # Modifying the following parameters is generally not required, and not
