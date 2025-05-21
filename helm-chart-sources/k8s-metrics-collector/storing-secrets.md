@@ -12,7 +12,7 @@ Preferred option is to use helm chart: https://external-secrets.io/v0.8.1/introd
 
 2. Create secret in cloud provider vault
 
-Create secret in cloud provider (e.g. AWS ParameterStore) with preferred name, e.g. `/prod/anodot/secrets`. The same name must be used in ExternalSecret manifest `kind: ExternalSecret` `remoteRef.key`. Secret values must be in JSON format, e.g `{"AWS_ACCESS_KEY_ID": "MySecretKeyId", "AWS_SECRET_ACCESS_KEY": "MySecretAccessKey"}`. Single cloud provider secret can contain many key,value pairs.
+Create secret in cloud provider (e.g. AWS ParameterStore) with preferred name, e.g. `/prod/umbrella/secrets`. The same name must be used in ExternalSecret manifest `kind: ExternalSecret` `remoteRef.key`. Secret values must be in JSON format, e.g `{"AWS_ACCESS_KEY_ID": "MySecretKeyId", "AWS_SECRET_ACCESS_KEY": "MySecretAccessKey"}`. Single cloud provider secret can contain many key,value pairs.
 
 3. Ensure Kubernetes cluster has permissions to get secrets from cloud provider vault.
 
@@ -20,7 +20,7 @@ Create secret in cloud provider (e.g. AWS ParameterStore) with preferred name, e
 
 SecretStore is used to connect to cloud provider secrets, e.g. https://external-secrets.io/v0.8.1/provider/aws-secrets-manager/
 
-ExternalSecret is used to generate Kuberentes Secret fetched from cloud provider secret. Generated Kuberentes Secret will be used further by k8s-metrics-collector after upgrade/installation.
+ExternalSecret is used to generate Kubernetes Secret fetched from cloud provider secret. Generated Kubernetes Secret will be used further by k8s-metrics-collector after upgrade/installation.
 
 External-secrets example for AWS ParameterStore integration:
 
@@ -29,7 +29,7 @@ cat <<EOF | kubectl apply -f -
  apiVersion: external-secrets.io/v1beta1
  kind: SecretStore
  metadata:
-   name: anodot
+   name: umbrella
    namespace: monitoring
  spec:
    provider:
@@ -44,29 +44,29 @@ cat <<EOF | kubectl apply -f -
  apiVersion: external-secrets.io/v1beta1
  kind: ExternalSecret
  metadata:
-   name: anodot
+   name: umbrella
    namespace: monitoring
  spec:
    refreshInterval: 1h                          # rate secrets sync interval
    secretStoreRef:
      kind: SecretStore
-     name: anodot                               # name of SecretStore
+     name: umbrella                             # name of SecretStore
    target:
     # Kubernetes Secret will be generated with target name
     # Consider the same name is used in chart k8s-metrics-collector in environmentExternalSecrets.name 
-     name: anodot-cost-secrets                  # Kubernetes Secret name to be created
+     name: umbrella-cost-secrets                # Kubernetes Secret name to be created
      creationPolicy: Owner
    data:
    - secretKey: AWS_ACCESS_KEY_ID               # Kubernetes Secret key name 
      remoteRef:
-       key: /prod/anodot/secrets                # secret name created in cloud vault
+       key: /prod/umbrella/secrets              # secret name created in cloud vault
        # secrets must be stored in JSON format in cloud provider vault
        # for this secret example  {"AWS_ACCESS_KEY_ID": "MySecretKeyId", "AWS_SECRET_ACCESS_KEY": "MySecretAccessKey"} 
        # value MySecretKeyId will be fetched based on key AWS_ACCESS_KEY_ID and added to Kubernetes Secret
        property: AWS_ACCESS_KEY_ID              
    - secretKey: AWS_SECRET_ACCESS_KEY
      remoteRef:
-       key: /prod/anodot/secrets
+       key: /prod/umbrella/secrets
        property: AWS_SECRET_ACCESS_KEY
 EOF
 ```
