@@ -13,7 +13,7 @@ environment:
   # The name of the K8S cluster, which should match its name in your cloud environment
   CLUSTER_NAME: '<INSERT CLUSTER NAME HERE>'
 
-  # Root account ID: In AWS that's ID of the payer account. For Azure it's the name of the account in Anodot-Costs>'
+  # Root account ID: In AWS that's ID of the payer account. For Azure it's the name of the account in Umbrella-Cost>'
   ACCOUNT_ID: '<INSERT ROOT ACCOUNT ID HERE>'
 
   # Cluster owner account ID: In AWS that's the linked account ID owning the cluster. In Azure that's the subscription ID.
@@ -72,9 +72,9 @@ environment:
 
 
 environmentSecrets:
-  # Access key required for uploading collected metrics to Anodot (should be provided to you by Anodot)
-  AWS_ACCESS_KEY_ID: '<INSERT ANODOT ACCESS KEY>'
-  AWS_SECRET_ACCESS_KEY: '<INSERT ANODOT SECRET ACCESS KEY>'
+  # Access key required for uploading collected metrics to Umbrella (should be provided to you by Umbrella)
+  AWS_ACCESS_KEY_ID: '<INSERT UMBRELLA ACCESS KEY>'
+  AWS_SECRET_ACCESS_KEY: '<INSERT UMBRELLA SECRET ACCESS KEY>'
 
 kubePrometheusStack:
   # Enable prometheus deployment
@@ -163,7 +163,7 @@ serviceAccount:
 environmentExternalSecrets:
   enabled: false
   ## Provide secret name, it must be the same as defined in kind:ExternalSecret target.name, more details in README.md
-  name: anodot-cost-secrets
+  name: umbrella-cost-secrets
 
 resources: {}
   # The following settings were tested on ~100000 metrics. The agent might require a larger amount of resources in case

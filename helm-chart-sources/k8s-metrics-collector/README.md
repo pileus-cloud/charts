@@ -1,11 +1,11 @@
-# Prometheus-Agent for Anodot-Cost
+# Prometheus-Agent for Umbrella-Cost
 
 ## Introduction
 
-This Helm chart is for the installation of Anodot's Prometheus-Agent for Kubernetes.
+This Helm chart is for the installation of Umbrella's Prometheus-Agent for Kubernetes.
 
-This agent is deployed as ChronJob and collects metrics of the cluster from Prometheus, and sends them to Anodot, where
-it is then being analyzed for usage and cloud costs allocation to the cluster's components. 
+This agent is deployed as ChronJob and collects metrics of the cluster from Prometheus, and sends them to Umbrella, 
+where it is then being analyzed for usage and cloud costs allocation to the cluster's components. 
 
 
 ## Table of contents
@@ -23,9 +23,9 @@ The agent has to be installed **per cluster**.  In case metrics from multiple cl
 repository, there should be an agent instance for each cluster, where each agent is [configured](values.yaml) to match metrics
 from a single cluster. 
 
-The followings are required before installing Prometheus-Agent for Anodot-Cost:
+The followings are required before installing Prometheus-Agent for Umbrella:
 - `Helm 3`
-- Anodot Access Key for uploading collected metrics (should be provided to you by Anodot)
+- Umbrella Access Key for uploading collected metrics (should be provided to you by Umbrella)
 - Prometheus or a compatible service with accessible Prometheus-query API endpoint
   - The agent can either integrate with your existing Prometheus server, or be installed with a compatible lightweight
     Prometheus stack provided by this chart.
@@ -83,7 +83,10 @@ $ helm upgrade <PROMETHEUS RELEASE> <OTHER OPTIONAL ARGS> --set kube-state-metri
 The agent can be installed solitarily as a release that integrates with your existing Prometheus server (the default),
 or as a standalone release that also includes a compatible lightweight Prometheus stack.
 
-1. Add anodot-cost Helm repository:
+Note: Umbrella recommends that you integrate with a Prometheus solution maintained by your end if possible. It is also
+strongly discouraged to include the optional Prometheus stack if you already have a Prometheus solution in your cluster.
+
+1. Add the Umbrella Helm repository:
    ```bash
    $ helm repo add anodot-cost https://pileus-cloud.github.io/charts
    ```
@@ -94,7 +97,7 @@ or as a standalone release that also includes a compatible lightweight Prometheu
 
 2. Set the required parameters in the [values.yaml](values.yaml) file and save a copy locally (preferably containing 
    just the modified values). Make sure to replace all the relevant values according to the comments for each value,
-   including the Anodot access key.
+   including the Umbrella access key.
    * Alternatively, you can set any value as a set argument in the `helm upgrade` command. You can also use a method for
      [storing secrets safely](storing-secrets.md) such as [external-secrets](https://external-secrets.io/).
     
