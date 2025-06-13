@@ -7,7 +7,7 @@ config:
 image:
   repository: amazon/cloudwatch-agent
   pullPolicy: IfNotPresent
-  tag: "1.247359.1b252618"
+  tag: "1.300056.0b1123"
 
 resources:
   limits:
