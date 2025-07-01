@@ -70,11 +70,15 @@ environment:
   # When workload of type Deployment is set (non-default), uncomment this (and leave the value as it is).
   # CRON_SCHEDULE: : "1 * * * *"
 
-
-environmentSecrets:
-  # Access key required for uploading collected metrics to Anodot (should be provided to you by Anodot)
-  AWS_ACCESS_KEY_ID: '<INSERT ANODOT ACCESS KEY>'
-  AWS_SECRET_ACCESS_KEY: '<INSERT ANODOT SECRET ACCESS KEY>'
+# -----------------------------------------------------------------------------
+# OPTIONAL: Anodot access keys for metric uploads.
+# These should be provided to you by Anodot if required.
+# If you use environmentExternalSecrets instead, you can safely ignore this section.
+# -----------------------------------------------------------------------------
+# environmentSecrets:
+#   # Access key required for uploading collected metrics to Anodot (should be provided to you by Anodot)
+#   AWS_ACCESS_KEY_ID: '<INSERT ANODOT ACCESS KEY>'
+#   AWS_SECRET_ACCESS_KEY: '<INSERT ANODOT SECRET ACCESS KEY>'
 
 kubePrometheusStack:
   # Enable prometheus deployment
@@ -128,6 +132,7 @@ kube-prometheus-stack:
     - --metric-labels-allowlist=pods=[*],nodes=[*]
   nodeExporter:
     enabled: false
+  # Do not install operator if it is already installed
   prometheusOperator:
     enabled: true
   prometheus:
@@ -154,6 +159,14 @@ serviceAccount:
   # Specifies whether a service account should be created
   create: true
   # Annotations to add to the service account
+  #
+  # To use AWS IAM Role for Service Account (IRSA), uncomment the example below and replace placeholders:
+  # annotations:
+  #   eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME>
+  #
+  # IRSA Documentation:
+  # https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+  # https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
