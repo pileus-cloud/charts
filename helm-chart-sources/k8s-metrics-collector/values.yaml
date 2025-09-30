@@ -13,11 +13,11 @@ environment:
   # The name of the K8S cluster, which should match its name in your cloud environment
   CLUSTER_NAME: '<INSERT CLUSTER NAME HERE>'
 
-  # Root account ID: In AWS that's ID of the payer account. For Azure it's the name of the account in Anodot-Costs>'
-  ACCOUNT_ID: '<INSERT ROOT ACCOUNT ID HERE>'
+  # Root account ID: In AWS that's ID of the payer account (as shown in Umbrella cost UI). For Azure it's the name of the account in Anodot-Costs>'
+  ACCOUNT_ID: '<INSERT ROOT ACCOUNT ID HERE - as shown in Umbrella cost UI>'
 
-  # Cluster owner account ID: In AWS that's the linked account ID owning the cluster. In Azure that's the subscription ID.
-  LINKED_ACCOUNT_ID: '<INSERT CLUSTER OWNER ACCOUNT ID HERE>'
+  # Cluster owner account ID: In AWS that's the linked account ID owning the cluster (as shown in Umbrella cost UI). In Azure that's the subscription ID.
+  LINKED_ACCOUNT_ID: '<INSERT CLUSTER OWNER ACCOUNT ID HERE - as shown in Umbrella cost UI>'
 
   # Cloud provider. Valid options: 'aws' for AWS, 'azure' for Azure.
   CLOUD_PROVIDER: '<INSERT CLOUD PROVIDER HERE>'
