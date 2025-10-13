@@ -3,6 +3,7 @@ config:
   clusterRegion: "us-east-1"
   tagService: false
   collectionInterval: 120
+  enableGpuMonitoring: true
 
 image:
   repository: amazon/cloudwatch-agent

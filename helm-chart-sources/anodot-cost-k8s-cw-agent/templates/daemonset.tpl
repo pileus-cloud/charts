@@ -60,10 +60,20 @@ spec:
             - name: devdisk
               mountPath: /dev/disk
               readOnly: true
+            {{- if .Values.config.enableGpuMonitoring }}
+            - name: prometheusconfig
+              mountPath: /etc/prometheusconfig
+              readOnly: true
+            {{- end }}
       volumes:
         - name: cwagentconfig
           configMap:
             name: cwagentconfig
+        {{- if .Values.config.enableGpuMonitoring }}
+        - name: prometheusconfig
+          configMap:
+            name: prometheusconfig
+        {{- end }}
         - name: rootfs
           hostPath:
             path: /
