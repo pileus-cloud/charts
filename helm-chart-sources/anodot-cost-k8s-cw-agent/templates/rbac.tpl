@@ -27,10 +27,10 @@ metadata:
   name: {{ include "anodot-cost-cloudwatch-agent.fullname" . }}-role
 rules:
   - apiGroups: [""]
-    resources: ["pods", "nodes", "endpoints"]
+    resources: ["pods", "nodes", "endpoints", "services"]
     verbs: ["list", "watch"]
   - apiGroups: ["apps"]
-    resources: ["replicasets"]
+    resources: ["replicasets", "daemonsets", "deployments", "statefulsets"]
     verbs: ["list", "watch"]
   - apiGroups: ["batch"]
     resources: ["jobs"]
@@ -45,3 +45,4 @@ rules:
     resources: ["configmaps"]
     resourceNames: ["cwagent-clusterleader"]
     verbs: ["get","update"]
+

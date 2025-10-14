@@ -37,7 +37,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: CI_VERSION
-              value: "k8s/1.0.1"
+              value: "k8s/1.3.9"
           # Please don't change the mountPath
           volumeMounts:
             - name: cwagentconfig
@@ -72,7 +72,7 @@ spec:
             path: /var/run/docker.sock
         - name: containerdsock
           hostPath:
-            path: /run/containerd/containerd.sock
+            path: {{ .Values.containerdSockPath }}
         - name: varlibdocker
           hostPath:
             path: /var/lib/docker
