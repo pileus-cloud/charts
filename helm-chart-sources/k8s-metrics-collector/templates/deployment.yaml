@@ -97,6 +97,9 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        {{- with .Values.sidecars }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       volumes:
       {{- if .Values.configmap.enabled  }}
       {{- if or .Values.configmap.files .Values.configmap.binaryFiles }}
