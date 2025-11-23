@@ -13,6 +13,9 @@ environment:
   # The name of the K8S cluster, which should match its name in your cloud environment
   CLUSTER_NAME: '<INSERT CLUSTER NAME HERE>'
 
+  # The region of the K8S cluster, as defined in your cloud environment.
+  CLUSTER_REGION:
+
   # Root account ID: In AWS that's ID of the payer account (as shown in Umbrella cost UI). For Azure it's the name of the account in Anodot-Costs>'
   ACCOUNT_ID: '<INSERT ROOT ACCOUNT ID HERE - as shown in Umbrella cost UI>'
 
