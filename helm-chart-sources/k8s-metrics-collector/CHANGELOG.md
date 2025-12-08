@@ -8,5 +8,3 @@
 
   - **CloudWatch EMF Monitoring** - New enviroment value `MONITORING=cloudwatch-emf` enables CloudWatch Embedded Metric Format (EMF) output for agent monitoring metrics. The agent can now publish its own operational metrics (like collection success/failure) directly to UmbrellaCost CloudWatch Logs, which are 
   automatically extracted as CloudWatch metrics.
-
-  **Full Changelog**: https://github.com/pileus-cloud/k8s-metrics-collector/compare/0.3.23...0.3.24
