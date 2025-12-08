@@ -1,7 +1,7 @@
 image:
   repository: public.ecr.aws/i5o6o6d7/k8s-metrics-agent
   pullPolicy: IfNotPresent
-  tag: 0.3.23
+  tag: 0.3.24
 
 # -----------------------------------------------------------------------------
 # The following parameters should be configured according to your environment.
