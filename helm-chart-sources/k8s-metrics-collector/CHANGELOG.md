@@ -1,3 +1,7 @@
+  # 0.3.25
+  ## What's Changed
+  * [PIL-15990]: update boto3 so support eks pod-identity
+
   # 0.3.24
   ## What's Changed
   * [PIL-15827]: fail if Prometheus query returns no-data
