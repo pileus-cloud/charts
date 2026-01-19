@@ -39,7 +39,6 @@ The job collecting the metric has a non-default name.
 |--------------------|----------------------|
 | kube-state-metrics | `kube-state-metrics` |
 | kubelet            | `kubelet`            |
-| node-exporter      | `node-exporter`      |
 
 **Solution:** Check actual job names in Prometheus:
 ```promql
