@@ -39,23 +39,26 @@ All of them should be available by default on most environments, except node lab
 see [labels collection](#labels-collection).
 
 
-| Metric                                 | Responsible job    |
-|----------------------------------------|--------------------|
-| container_cpu_usage_seconds_total      | kubelet            |
-| container_memory_usage_bytes           | kubelet            |
-| container_network_receive_bytes_total  | kubelet            |
-| container_network_transmit_bytes_total | kubelet            |
-| kube_node_info                         | kube-state-metrics |
-| kube_node_labels                       | kube-state-metrics |
-| kube_node_status_capacity              | kube-state-metrics |
-| kube_pod_completion_time               | kube-state-metrics |
-| kube_pod_container_info                | kube-state-metrics |
-| kube_pod_container_resource_limits     | kube-state-metrics |
-| kube_pod_container_resource_requests   | kube-state-metrics |
-| kube_pod_created                       | kube-state-metrics |
-| kube_pod_info                          | kube-state-metrics |
-| kube_pod_labels                        | kube-state-metrics |
-| kube_replicaset_owner                  | kube-state-metrics |
+| Metric                                            | Responsible job    |
+|---------------------------------------------------|--------------------|
+| container_cpu_usage_seconds_total                 | kubelet            |
+| container_memory_usage_bytes                      | kubelet            |
+| container_network_receive_bytes_total             | kubelet            |
+| container_network_transmit_bytes_total            | kubelet            |
+| kube_node_info                                    | kube-state-metrics |
+| kube_node_labels                                  | kube-state-metrics |
+| kube_node_status_capacity                         | kube-state-metrics |
+| kube_pod_completion_time                          | kube-state-metrics |
+| kube_pod_container_info                           | kube-state-metrics |
+| kube_pod_container_resource_limits                | kube-state-metrics |
+| kube_pod_container_resource_requests              | kube-state-metrics |
+| kube_pod_created                                  | kube-state-metrics |
+| kube_pod_info                                     | kube-state-metrics |
+| kube_pod_labels                                   | kube-state-metrics |
+| kube_replicaset_owner                             | kube-state-metrics |
+| kube_pod_spec_volumes_persistentvolumeclaims_info | kube-state-metrics |
+| kube_persistentvolumeclaim_info                   | kube-state-metrics |
+| kube_persistentvolume_info                        | kube-state-metrics |
 
 
 #### Labels collection
