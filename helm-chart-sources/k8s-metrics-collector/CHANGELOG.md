@@ -1,3 +1,8 @@
+  # 0.3.26
+  ## What's Changed
+  * [PIL-16258]: fix validation to support valid prometheus no-data scenarios. Improved validation error message
+  * [PIL-16424]: add missing CUSTOM_LABEL_FILTER to volume metrics
+
   # 0.3.25
   ## What's Changed
   * [PIL-15990]: update boto3 so support eks pod-identity
