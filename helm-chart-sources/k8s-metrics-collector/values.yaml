@@ -165,6 +165,22 @@ CronJob:
   # -- Valid values: "OnFailure", "Never"
   restartPolicy: "Never"
   backoffLimit: 0
+  # Restricted container defaults for the CronJob workload. Top-level securityContext values override these fields.
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsGroup: 1000
+    runAsNonRoot: true
+    runAsUser: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  # Writable runtime storage for temporary files and the local rotating log.
+  writableTmp:
+    enabled: true
+    emptyDir: {}
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -204,7 +220,7 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext: {} # Overrides workload security-context defaults.
   # capabilities:
   #   drop:
   #   - ALL

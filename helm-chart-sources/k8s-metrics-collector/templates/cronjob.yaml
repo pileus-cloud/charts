@@ -38,8 +38,9 @@ spec:
             {{- toYaml .Values.podSecurityContext | nindent 12 }}
           containers:
             - name: {{ .Chart.Name }}
+              {{- $securityContext := mergeOverwrite (deepCopy .Values.CronJob.securityContext) .Values.securityContext }}
               securityContext:
-                {{- toYaml .Values.securityContext | nindent 16 }}
+                {{- toYaml $securityContext | nindent 16 }}
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               env:
@@ -79,6 +80,10 @@ spec:
               {{- end }}
               {{- end }}
               volumeMounts:
+                {{- if .Values.CronJob.writableTmp.enabled }}
+                - mountPath: /tmp
+                  name: runtime-tmp
+                {{- end }}
                 {{- if .Values.configmap.enabled }}
                 {{- if .Values.configmap.files }}
                 {{- range .Values.configmap.files }}
@@ -103,6 +108,11 @@ spec:
               resources:
                 {{- toYaml .Values.resources | nindent 16 }}
           volumes:
+          {{- if .Values.CronJob.writableTmp.enabled }}
+            - name: runtime-tmp
+              emptyDir:
+                {{- toYaml .Values.CronJob.writableTmp.emptyDir | nindent 16 }}
+          {{- end }}
           {{- if .Values.configmap.enabled  }}
           {{- if or .Values.configmap.files .Values.configmap.binaryFiles }}
             - name: files
