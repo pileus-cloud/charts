@@ -3,9 +3,9 @@ entries:
   anodot-cost-k8s-cw-agent:
   - apiVersion: v2
     appVersion: 1.300056.0b1123
-    created: "2026-01-28T10:55:41.520588469Z"
+    created: "2026-08-07T08:55:26.185679408Z"
     description: A Helm chart for Kubernetes
-    digest: 496835851cde9aaabd9615a9db45205dceaaea7ba7b4b53f12b7a8ec2c94a1b6
+    digest: c310ec7c97e1e1b15948200cfa4c94b0bb6f5e892cb770570126042ae21f4987
     name: anodot-cost-k8s-cw-agent
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2026-01-28T10:55:41.520357354Z"
+    created: "2026-08-07T08:55:26.185427771Z"
     description: A Helm chart for Kubernetes
     digest: 523d19348a9e706db23fb8270ef96f3c9916e97c5556d02824b00fce025eb545
     name: anodot-cost-k8s-cw-agent
@@ -23,7 +23,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.520126899Z"
+    created: "2026-08-07T08:55:26.185176205Z"
     description: A Helm chart for Kubernetes
     digest: ae66094f429cf96ab816a689c52acce5788d472f42599d695e536b408b276939
     name: anodot-cost-k8s-cw-agent
@@ -33,7 +33,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.519904863Z"
+    created: "2026-08-07T08:55:26.184931508Z"
     description: A Helm chart for Kubernetes
     digest: 365f5ec24a1127858f6ffb693883f7af72b1b7a4b22f409b308578954ec08bef
     name: anodot-cost-k8s-cw-agent
@@ -43,7 +43,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.519673868Z"
+    created: "2026-08-07T08:55:26.184686872Z"
     description: A Helm chart for Kubernetes
     digest: e0d1fec2cb0cb5d2283a3a2babe6ad46b9dbefbb8b21fa3ec4d16e8ac7a0c3a4
     name: anodot-cost-k8s-cw-agent
@@ -53,7 +53,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.519405912Z"
+    created: "2026-08-07T08:55:26.184400955Z"
     description: A Helm chart for Kubernetes
     digest: 878578f99db77f6ad1c3543bad002eac59614238140fa8d2158e9d3a6b92e7e3
     name: anodot-cost-k8s-cw-agent
@@ -63,7 +63,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.519148156Z"
+    created: "2026-08-07T08:55:26.184027685Z"
     description: A Helm chart for Kubernetes
     digest: fb3afd004ce7c18dae4212337e17f37e6546aec01c385f39954c000e5397c387
     name: anodot-cost-k8s-cw-agent
@@ -73,7 +73,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.51885938Z"
+    created: "2026-08-07T08:55:26.183065151Z"
     description: A Helm chart for Kubernetes
     digest: 934ffd88cf275d28fc9ed7fdc431839d06654dfed2435eee350ccb065e7740b2
     name: anodot-cost-k8s-cw-agent
@@ -83,7 +83,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.518564843Z"
+    created: "2026-08-07T08:55:26.182701542Z"
     description: A Helm chart for Kubernetes
     digest: f03608653b29d0385f35a48e590838593d63c28f8b1b757d701846814feac42b
     name: anodot-cost-k8s-cw-agent
@@ -93,7 +93,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.518303137Z"
+    created: "2026-08-07T08:55:26.182443435Z"
     description: A Helm chart for Kubernetes
     digest: f3a4ea132c8d7d41813ef5dd2bcbf242f2d9d1639f7817bf40a0c59ba2b5226b
     name: anodot-cost-k8s-cw-agent
@@ -103,8 +103,23 @@ entries:
     version: 0.1.0
   k8s-metrics-collector:
   - apiVersion: v2
+    appVersion: 0.3.27
+    created: "2026-08-07T08:55:26.57547598Z"
+    dependencies:
+    - condition: kubePrometheusStack.enabled
+      name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 72.5.*
+    description: A Helm chart for Kubernetes
+    digest: ba03a68236127bf2b327810c05c87f1f3616c5bc0751adf34cecbbdf7546adfa
+    name: k8s-metrics-collector
+    type: application
+    urls:
+    - https://pileus-cloud.github.io/charts/k8s-metrics-collector-0.1.31.tgz
+    version: 0.1.31
+  - apiVersion: v2
     appVersion: 0.3.26
-    created: "2026-01-28T10:55:41.896685998Z"
+    created: "2026-08-07T08:55:26.548899481Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -119,7 +134,7 @@ entries:
     version: 0.1.30
   - apiVersion: v2
     appVersion: 0.3.25
-    created: "2026-01-28T10:55:41.868037515Z"
+    created: "2026-08-07T08:55:26.521512022Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -134,7 +149,7 @@ entries:
     version: 0.1.29
   - apiVersion: v2
     appVersion: 0.3.24
-    created: "2026-01-28T10:55:41.839115527Z"
+    created: "2026-08-07T08:55:26.493965967Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -149,7 +164,7 @@ entries:
     version: 0.1.28
   - apiVersion: v2
     appVersion: 0.3.23
-    created: "2026-01-28T10:55:41.809281796Z"
+    created: "2026-08-07T08:55:26.46164104Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -164,7 +179,7 @@ entries:
     version: 0.1.27
   - apiVersion: v2
     appVersion: 0.3.22
-    created: "2026-01-28T10:55:41.780542672Z"
+    created: "2026-08-07T08:55:26.425709162Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -179,7 +194,7 @@ entries:
     version: 0.1.26
   - apiVersion: v2
     appVersion: 0.3.22
-    created: "2026-01-28T10:55:41.750943507Z"
+    created: "2026-08-07T08:55:26.398839476Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -194,7 +209,7 @@ entries:
     version: 0.1.25
   - apiVersion: v2
     appVersion: 0.3.21
-    created: "2026-01-28T10:55:41.720503154Z"
+    created: "2026-08-07T08:55:26.37120417Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -209,7 +224,7 @@ entries:
     version: 0.1.24
   - apiVersion: v2
     appVersion: 0.3.21
-    created: "2026-01-28T10:55:41.69747824Z"
+    created: "2026-08-07T08:55:26.349200876Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -224,7 +239,7 @@ entries:
     version: 0.1.23
   - apiVersion: v2
     appVersion: 0.3.20
-    created: "2026-01-28T10:55:41.675787054Z"
+    created: "2026-08-07T08:55:26.327338348Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -239,7 +254,7 @@ entries:
     version: 0.1.22
   - apiVersion: v2
     appVersion: 0.3.20
-    created: "2026-01-28T10:55:41.652171647Z"
+    created: "2026-08-07T08:55:26.305719746Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -254,7 +269,7 @@ entries:
     version: 0.1.21
   - apiVersion: v2
     appVersion: 0.3.19
-    created: "2026-01-28T10:55:41.627783522Z"
+    created: "2026-08-07T08:55:26.281874116Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -269,7 +284,7 @@ entries:
     version: 0.1.20
   - apiVersion: v2
     appVersion: 0.3.18
-    created: "2026-01-28T10:55:41.603000756Z"
+    created: "2026-08-07T08:55:26.259106915Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -284,7 +299,7 @@ entries:
     version: 0.1.19
   - apiVersion: v2
     appVersion: 0.3.17-gcp
-    created: "2026-01-28T10:55:41.578739154Z"
+    created: "2026-08-07T08:55:26.237389628Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -299,7 +314,7 @@ entries:
     version: 0.1.18
   - apiVersion: v2
     appVersion: latest
-    created: "2026-01-28T10:55:41.55395384Z"
+    created: "2026-08-07T08:55:26.21474929Z"
     dependencies:
     - condition: kubePrometheusStack.enabled
       name: kube-prometheus-stack
@@ -314,7 +329,7 @@ entries:
     version: 0.1.17
   - apiVersion: v2
     appVersion: 0.3.17
-    created: "2026-01-28T10:55:41.525860469Z"
+    created: "2026-08-07T08:55:26.189714611Z"
     description: A Helm chart for Kubernetes
     digest: c544cfe9ecc026c7c2a6de48415f2e39d02b39ae8db467c3d159c918898d3ad7
     name: k8s-metrics-collector
@@ -324,7 +339,7 @@ entries:
     version: 0.1.16
   - apiVersion: v2
     appVersion: 0.3.16
-    created: "2026-01-28T10:55:41.525358508Z"
+    created: "2026-08-07T08:55:26.189238379Z"
     description: A Helm chart for Kubernetes
     digest: 31fb1ee54b7159abc93f7efcca5fc3ddcb11b040ad3dc383211f41633317ebf8
     name: k8s-metrics-collector
@@ -334,7 +349,7 @@ entries:
     version: 0.1.15
   - apiVersion: v2
     appVersion: 0.3.15
-    created: "2026-01-28T10:55:41.524902987Z"
+    created: "2026-08-07T08:55:26.188720376Z"
     description: A Helm chart for Kubernetes
     digest: 05d543fa83974ef3f31c389a02151153165239a8c8d45dfc8e33ab81dd9d6329
     name: k8s-metrics-collector
@@ -344,7 +359,7 @@ entries:
     version: 0.1.14
   - apiVersion: v2
     appVersion: 0.3.14
-    created: "2026-01-28T10:55:41.524393936Z"
+    created: "2026-08-07T08:55:26.188259804Z"
     description: A Helm chart for Kubernetes
     digest: 205255a5f062ab37a4e73a240a6e42d3e916a45a7d660716cd6a584759000af6
     name: k8s-metrics-collector
@@ -354,7 +369,7 @@ entries:
     version: 0.1.13
   - apiVersion: v2
     appVersion: 0.3.13
-    created: "2026-01-28T10:55:41.523858313Z"
+    created: "2026-08-07T08:55:26.187802932Z"
     description: A Helm chart for Kubernetes
     digest: 511386c5281b8ac12fad40726c35c4e1647a2790175f7331a9a8078137b2ac3e
     name: k8s-metrics-collector
@@ -364,7 +379,7 @@ entries:
     version: 0.1.12
   - apiVersion: v2
     appVersion: 0.3.13
-    created: "2026-01-28T10:55:41.52281654Z"
+    created: "2026-08-07T08:55:26.18733327Z"
     description: A Helm chart for Kubernetes
     digest: 2caa71b4d3e3aef37929925555bdbf937f9780717632b7da97afc6a1c51da240
     name: k8s-metrics-collector
@@ -374,7 +389,7 @@ entries:
     version: 0.1.11
   - apiVersion: v2
     appVersion: 0.3.13
-    created: "2026-01-28T10:55:41.522205466Z"
+    created: "2026-08-07T08:55:26.186879178Z"
     description: A Helm chart for Kubernetes
     digest: 1515120085a09501485f877b59cff1bffa63a43709717d6caf804bd49da4c06e
     name: k8s-metrics-collector
@@ -384,7 +399,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: 0.3.12
-    created: "2026-01-28T10:55:41.899958083Z"
+    created: "2026-08-07T08:55:26.578138098Z"
     description: A Helm chart for Kubernetes
     digest: 5d5551d396a7a55f72ace1ac1086046114126d57c02f958ccc984a9c42273f22
     name: k8s-metrics-collector
@@ -394,7 +409,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.3.11
-    created: "2026-01-28T10:55:41.899516173Z"
+    created: "2026-08-07T08:55:26.577712247Z"
     description: A Helm chart for Kubernetes
     digest: 993c48a5fcd19bea3cc250d635e9181f2d7123cfd24b2b3b9191976bd3c96444
     name: k8s-metrics-collector
@@ -404,7 +419,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.3.10
-    created: "2026-01-28T10:55:41.899066293Z"
+    created: "2026-08-07T08:55:26.577252515Z"
     description: A Helm chart for Kubernetes
     digest: 9bf3384598a9d503c60e665a5d64af737fde42c431d6c18b272ec2ff4931821d
     name: k8s-metrics-collector
@@ -414,7 +429,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.3.9
-    created: "2026-01-28T10:55:41.898390647Z"
+    created: "2026-08-07T08:55:26.576820604Z"
     description: A Helm chart for Kubernetes
     digest: cbfa526a24561f689b56080db2c43145aebaadbe6643ca6448df54a603c0ee1e
     name: k8s-metrics-collector
@@ -424,7 +439,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.3.8
-    created: "2026-01-28T10:55:41.897707142Z"
+    created: "2026-08-07T08:55:26.576345542Z"
     description: A Helm chart for Kubernetes
     digest: 868277dbac4b8d64dfa58ef985f5a161d89a08bec94d26bc7880ec0e7ac2cd52
     name: k8s-metrics-collector
@@ -434,7 +449,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.3.8
-    created: "2026-01-28T10:55:41.89719444Z"
+    created: "2026-08-07T08:55:26.575930022Z"
     description: A Helm chart for Kubernetes
     digest: 645a66a770e22150634a9f506cce0db4cf04d8f44501c77357c1312f13b9bd42
     name: k8s-metrics-collector
@@ -444,7 +459,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.3.7
-    created: "2026-01-28T10:55:41.868531396Z"
+    created: "2026-08-07T08:55:26.521948653Z"
     description: A Helm chart for Kubernetes
     digest: 4134415097a65795847bf47700871317bea2bf7c8ef8aef0599abe8fba927c24
     name: k8s-metrics-collector
@@ -454,7 +469,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.3.4
-    created: "2026-01-28T10:55:41.603350984Z"
+    created: "2026-08-07T08:55:26.259454373Z"
     description: A Helm chart for Kubernetes
     digest: 2b1fea044c8e57faba5f63535969eefdb17dcbc9ce1e6105c9c6381e0e7c5a70
     name: k8s-metrics-collector
@@ -464,7 +479,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.2.20
-    created: "2026-01-28T10:55:41.521463019Z"
+    created: "2026-08-07T08:55:26.186357875Z"
     description: A Helm chart for Kubernetes
     digest: eb12b23cbffcd8d3fbd55d8216c71f3ea6181603c0485c4ea263b8dad966be0e
     name: k8s-metrics-collector
@@ -474,7 +489,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-28T10:55:41.520893666Z"
+    created: "2026-08-07T08:55:26.185996276Z"
     description: A Helm chart for Kubernetes
     digest: b24771f9578c0617216dc2f61589ac6fff3f3a09f955b7c50aecd49381c5f914
     name: k8s-metrics-collector
@@ -482,4 +497,4 @@ entries:
     urls:
     - https://pileus-cloud.github.io/charts/k8s-metrics-collector-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-28T10:55:41.517888908Z"
+generated: "2026-08-07T08:55:26.181970043Z"
