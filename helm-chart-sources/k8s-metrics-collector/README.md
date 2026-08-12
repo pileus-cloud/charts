@@ -30,6 +30,7 @@ The followings are required before installing Prometheus-Agent for Anodot-Cost:
   - The agent can either integrate with your existing Prometheus server, or be installed with a compatible lightweight
     Prometheus stack provided by this chart.
   - All the [specified metrics](#required-metrics) are available
+- `kube-state-metrics` is installed with [labels collection enabled](#labels-collection)
 
 ### Required metrics
 
